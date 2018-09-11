@@ -1,61 +1,61 @@
-# Content: Supervised Learning
-## Project: Finding Donors for CharityML
+# Conteúdo: Aprendizagem supervisionada
+## Projeto: Encontrando doadores para a CharityML
 
-## Project Overview
-In this project, you will apply supervised learning techniques and an analytical mind on data collected for the U.S. census to help CharityML (a fictitious charity organization) identify people most likely to donate to their cause. You will first explore the data to learn how the census data is recorded. Next, you will apply a series of transformations and preprocessing techniques to manipulate the data into a workable format. You will then evaluate several supervised learners of your choice on the data, and consider which is best suited for the solution. Afterwards, you will optimize the model you've selected and present it as your solution to CharityML. Finally, you will explore the chosen model and its predictions under the hood, to see just how well it's performing when considering the data it's given.
-predicted selling price to your statistics.
+## Visão geral do projeto
+Neste projeto, você aplicará técnicas de aprendizagem supervisionada e seu raciocínio analítico sobre os dados coletados pelo censo dos Estados Unidos para ajudar a CharityML (uma instituição de caridade fictícia) a identificar as pessoas com maior probabilidade de doar à causa deles. Primeiro, você fará uma exploração para saber como os dados do censo são gravados. Em seguida, aplicará uma série de transformações e técnicas de pré-processamento para manipular os dados e organizá-los em um formato com o qual poderá trabalhar. Depois, avaliará vários modelos de aprendizagem supervisionada de sua escolha sobre os dados para definir qual é o mais adequado para a solução. Depois disso, otimizará o modelo que você selecionou e o apresentará como sua solução para a CharityML. Por fim, você explorará o modelo escolhido e suas predições por debaixo dos panos para avaliar seu desempenho considerando os dados disponibilizados.
+preço de venda previsto para as suas estatísticas.
 
-## Project Highlights
-This project is designed to get you acquainted with the many supervised learning algorithms available in sklearn, and to also provide for a method of evaluating just how each model works and performs on a certain type of data. It is important in machine learning to understand exactly when and where a certain algorithm should be used, and when one should be avoided.
+## Destaques do projeto
+Este projeto foi desenvolvido de modo que você se familiarize com os muitos algoritmos de aprendizagem supervisionada disponíveis em sklearn e também para mostrar como cada modelo funciona e performa em um determinado tipo de dado. É importante em machine learning compreender exatamente quando e onde um determinado algoritmo deve ser usado e quando deve ser evitado.
 
-Things you will learn by completing this project:
-- How to identify when preprocessing is needed, and how to apply it.
-- How to establish a benchmark for a solution to the problem.
-- What each of several supervised learning algorithms accomplishes given a specific dataset.
-- How to investigate whether a candidate solution model is adequate for the problem.
+O que você aprenderá ao concluir este projeto:
+- Como identificar se o pré-processamento é necessário e como aplicá-lo.
+- Como estabelecer uma referência para uma solução do problema.
+- O que cada um dos vários algoritmos de aprendizagem supervisionada realiza, considerando um conjunto de dados específico.
+- Como avaliar se um candidato a modelo de solução é adequado ao problema.
 
-## Software Requirements
+## Requisitos de software
 
-This project uses the following software and Python libraries:
+Este projeto utiliza os seguintes software e bibliotecas Python:
 
 - [Python 2.7](https://www.python.org/download/releases/2.7/)
 - [NumPy](http://www.numpy.org/)
 - [Pandas](http://pandas.pydata.org/)
 - [scikit-learn](http://scikit-learn.org/stable/)
-- [matplotlib](http://matplotlib.org/)
+- [Matplotlib](http://matplotlib.org/)
 
-You will also need to have software installed to run and execute a [Jupyter Notebook](http://ipython.org/notebook.html)
+Você também precisará ter um software instalado para rodar e executar um [notebook Jupyter](http://ipython.org/notebook.html)
 
-If you do not have Python installed yet, it is highly recommended that you install the [Anaconda](http://continuum.io/downloads) distribution of Python, which already has the above packages and more included. Make sure that you select the Python 2.7 installer and not the Python 3.x installer.
+Se você ainda não tem o Python instalado, é altamente recomendado que instale a distribuição [Anaconda](http://continuum.io/downloads), que já tem os pacotes acima incluídos. Certifique-se de selecionar o instalador Python 2.7, não o 3.x.
 
-## Starting the Project
+## Iniciando o projeto
 
-For this assignment, you can find the `finding_donors` folder containing the necessary project files on the [Machine Learning projects GitHub](https://github.com/udacity/machine-learning), under the `projects` folder. You may download all of the files for projects we'll use in this Nanodegree program directly from this repo. Please make sure that you use the most recent version of project files when completing a project!
+Para esta tarefa, você pode achar a pasta `finding_donors`, contendo os arquivos de projeto necessários, no [GitHub de projetos de machine learning](https://github.com/udacity/br-machine-learning), dentro da pasta `projects`. Você pode baixar todos os arquivos de projetos que iremos usar neste programa Nanodegree diretamente desse repositório. Certifique-se de usar a versão mais recente dos arquivos ao concluir um projeto.
 
-This project contains three files:
+Este projeto contém três arquivos:
 
-- `finding_donors.ipynb`: This is the main file where you will be performing your work on the project.
-- `census.csv`: The project dataset. You'll load this data in the notebook.
-- `visuals.py`: A Python file containing visualization code that is run behind-the-scenes. Do not modify
+- `finding_donors_PT.ipynb`: Este é o arquivo principal com o qual você trabalhará em seu projeto.
+- `census.csv`: O conjunto de dados do projeto. Você carregará esses dados no notebook.
+- `visuals.py`: Um arquivo Python que contém o código de visualização que é executado nos bastidores. Não o modifique
 
-In the Terminal or Command Prompt, navigate to the folder containing the project files, and then use the command `jupyter notebook finding_donors.ipynb` to open up a browser window or tab to work with your notebook. Alternatively, you can use the command `jupyter notebook` or `ipython notebook` and navigate to the notebook file in the browser window that opens. Follow the instructions in the notebook and answer each question presented to successfully complete the project. A **README** file has also been provided with the project files which may contain additional necessary information or instruction for the project. 
+No terminal ou janela de comando, navegue até a pasta contendo os arquivos do projeto; em seguida, use o comando `jupyter notebook finding_donors_PT.ipynb` para abrir uma janela ou aba do navegador e trabalhar com seu notebook. Alternativamente, você pode usar o comando `jupyter notebook` ou `ipython notebook` e navegar para o arquivo notebook na janela do navegador que abrir. Siga as instruções no notebook e responda a todas as perguntas apresentadas para concluir o projeto com sucesso. Um arquivo **README** também foi fornecido com os arquivos de projeto, contendo as instruções ou informações adicionais necessárias. 
 
-## Submitting the Project
+## Enviando o projeto
 
-### Evaluation
-Your project will be reviewed by a Udacity reviewer against the **<a href="https://review.udacity.com/#!/rubrics/406/view" target="_blank">Finding Donors for CharityML project rubric</a>**. Be sure to review this rubric thoroughly and self-evaluate your project before submission. All criteria found in the rubric must be *meeting specifications* for you to pass.
+### Avaliação
+Seu projeto será avaliado por um revisor da Udacity, de acordo com a **<a href="https://review.udacity.com/#!/rubrics/1499/view" target="_blank">rubrica do projeto Encontrando doadores para a CharityML</a>**. Lembre-se de revisar esta rubrica cuidadosamente e autoavaliar seu projeto antes de enviá-lo. Todos os critérios encontrados nesta rubrica devem *atender às especificações* para que você seja aprovado.
 
-### Submission Files
-When you are ready to submit your project, collect the following files and compress them into a single archive for upload. Alternatively, you may supply the following files on your GitHub Repo in a folder named `student_intervention` for ease of access:
- - The `finding_donors.ipynb` notebook file with all questions answered and all code cells executed and displaying output.
- - An **HTML** export of the project notebook with the name **report.html**. This file *must* be present for your project to be evaluated.
+### Arquivos para envio
+Quando estiver pronto para enviar o projeto, reúna os arquivos a seguir e os comprima em um único arquivo para upload. Alternativamente, você pode fornecer os seguintes arquivos no seu repositório GitHub em uma pasta chamada `finding_donors` para facilitar o acesso:
+ - O arquivo notebook `finding_donors_PT.ipynb`, com todas as perguntas respondidas e todas as células de código executadas e mostrando a saída.
+ - Uma exportação **HTML** do notebook do projeto, com o nome **report.html**. Este arquivo *deve* estar presente para o seu projeto ser avaliado.
 
-Once you have collected these files and reviewed the project rubric, proceed to the project submission page.
+Assim que você tiver reunido todos esses arquivos e revisado sua rubrica, prossiga para a página de envio do projeto.
 
-### I'm Ready!
-When you're ready to submit your project, click on the **Submit Project** button at the bottom of the page.
+### Estou pronto!
+Quando estiver pronto para enviar seu projeto, clique no botão ***Enviar projeto***, no final da página.
 
-If you are having any problems submitting your project or wish to check on the status of your submission, please email us at **machine-support@udacity.com** or visit us in the <a href="http://discussions.udacity.com" target="_blank">discussion forums</a>.
+Caso tenha problemas de envio ou queira conferir o status de sua entrega, mande um e-mail para **suporte@udacity.com** ou acesse os <a href="http://discussions.udacity.com" target="_blank">fóruns de discussão</a>.
 
-### What's Next?
-You will get an email as soon as your reviewer has feedback for you. In the meantime, review your next project and feel free to get started on it or the courses supporting it!
+### E agora?
+Você receberá um e-mail assim que seu projeto tiver um feedback do revisor. Enquanto isso, revise seu próximo projeto e fique à vontade para começá-lo ou começar os cursos que o apoiam!
