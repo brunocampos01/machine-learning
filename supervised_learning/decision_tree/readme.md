@@ -107,7 +107,7 @@ Image('/home/brunocampos01/projetos/data_science_machine_learning/images/ex_tree
 
 
 
-![png](output_9_0.png)
+![png](image/output_9_0.png)
 
 
 
