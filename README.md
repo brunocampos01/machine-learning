@@ -20,7 +20,8 @@ Outra subcategoria de aprendizado supervisionado é usada quando o valor que est
 ---
 
 # Supervised Learning
-Uma aprendizagem deste tipo apresenta problemas do tipo classification e regression. A principal diferença entre classification e regression é que na classification, nós **prevemos um estado**, enquanto, na regression, **prevemos um valor.**
+Uma aprendizagem deste tipo apresenta problemas do tipo classification e regression. A principal diferença entre classification e regression é que na classification, nós **prevemos um estado**, enquanto, na regression, **prevemos um valor.**<br/>
+Resumindo, qualquer problema em que se busca prever uma variável `y` a partir de variáveis `X^ tem o potencial para ser resolvido com aprendizado de máquina supervisionado.
 
 Podemos usar modelos matemáticos para ser as regras de aprendizado:
 * ## Linear regression
@@ -42,61 +43,14 @@ Podemos usar modelos matemáticos para ser as regras de aprendizado:
      * [Papyrus]()
      * [Exercices]()
 
-## Advantages and Disadvantages of the models
-
-
-### Logistic Regression
-#### Advantages
- - Don’t have to worry about features being correlated
- - You can easily update your model to take in new data (unlike Decision Trees or SVM)
- 
-#### Disadvantages
- - Deals bad with outliers
- - Must have lots of incomes for each class
- - Presence of multicollinearity
- 
- 
-### Decision Tree
-#### Advantages
- - Easy to understand and interpret (for some people)
- - Easy to use - Doesn’t need data normalisation, dummy variables, etc
- - Can handle multi-output models
- - Easily handle feature interactions
- - Don’t have to worry about outliers
- 
-#### Disadvantages
- - It can be easily overfitted
- - Stability —> small changes in data can lead to completely different trees
- - If a class dominates, it can easily be biased
- - Don’t support online learning –> you should rebuilt the tree when new data comes
-
-
-### SVM
-#### Advantages
- - High accuracy
- - Nice theoretical guarantees regarding overfitting
- - Especially popular in text classification problems
- 
-#### Disavantages
- - Memory-intensive
- - Hard to interpret
- - Complicated to run and tune
- 
-
-### Ensemble Methods
-#### Advantages
- - Harder to overfit
- - Usually better perfomance than a single model
- 
-#### Disadvantages
- - Scaling —> usually it trains several models, which can have a bad performance with larger datasets
- - Hard to implement in real time platform
- - Complexity increases
- - Boosting delivers poor probability estimates (https://arxiv.org/ftp/arxiv/papers/1207/1207.1403.pdf)
-
-
 ---
 # Unsupervised Learning
+Aprendizado não supervisionado é quando temos apenas dados X, sem os pares y. Nesse tipo de regime, estamos tentando achar alguma estrutura nos dados
+<br/>
+os dados X quase sempre vem corrompidos com ruído
+<br/>
+Algumas aplicações de AM não supervisionado são segmentação de consumidores (algoritmos de clusters), visualização de dados multidimensionais, compressão de dados e análise de mídias sociais. 
+<br/>
 - Clustering
  - Clustering hierarquico
  - Modelos de mistura de gaussianas e validação de cluster
@@ -105,6 +59,9 @@ Podemos usar modelos matemáticos para ser as regras de aprendizado:
 
 ---
 # Reinforcement learning:
+Aprendizado por reforço é quando, em um certo ambiente, queremos mapear que ações tomar, dado o estado do ambiente
+<br/>
+Algumas das aplicações de AM por reforço são construir oponentes em videogames, movimentação de robôs, simulações de ambientes complexos e aprender estratégias de trade no mercado financeiro.<br/>
  - A estrutura da aprendizagem por reforço: o problema
  - A estrutura da aprendizagem por reforço: a solução
  - Programação dinâmica
@@ -122,6 +79,15 @@ Podemos usar modelos matemáticos para ser as regras de aprendizado:
 
 <img src="images/output_8_0.png" />
 
+## Capacidade e generalização
+...
+## Teorema "Não há almoço grátis"
+...
+
+
 ## References:
  - http://blog.echen.me/2011/04/27/choosing-a-machine-learning-classifier/
-        
+ - https://matheusfacure.github.io/AM-Essencial/#am-tres-tipos
+
+---
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Bruno A. R. M. Campos</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
