@@ -59,9 +59,9 @@ Algumas aplicações de AM não supervisionado são segmentação de consumidore
 
 ---
 # Reinforcement learning:
-Aprendizado por reforço é quando, em um certo ambiente, queremos mapear que ações tomar, dado o estado do ambiente
+O Aprendizado por reforço explora as _situações de aprendizagem_ a partir das interações.
 <br/>
-Algumas das aplicações de AM por reforço são construir oponentes em videogames, movimentação de robôs, simulações de ambientes complexos e aprender estratégias de trade no mercado financeiro.<br/>
+Algumas das aplicações de machine learning por reforço são construir oponentes em videogames, movimentação de robôs, simulações de ambientes complexos e aprender estratégias de trade no mercado financeiro.<br/>
  - A estrutura da aprendizagem por reforço: o problema
  - A estrutura da aprendizagem por reforço: a solução
  - Programação dinâmica
