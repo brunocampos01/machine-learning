@@ -1,7 +1,7 @@
 
 # Decision Tree
 
-Árvores de decisão são um método de _aprendizagem supervisionada_ usado para classificação e regressão.
+Decision Tree são um método de _aprendizagem supervisionada_ usado para classificação e regressão.
 
  - **Classificação** (DecisionTreeClassifier)
 
