@@ -1,7 +1,7 @@
 
 # Decision Tree
 
-Árvores de decisão são um método de _aprendizagem supervisionada_ usado para classificação e regressão.
+Decision Tree são um método de _aprendizagem supervisionada_ usado para classificação e regressão.
 
  - **Classificação** (DecisionTreeClassifier)
 
@@ -102,7 +102,7 @@ Amostras mínimas pequenas por folha podem resultar em folhas com muito poucas a
  - **overfitting**: gera árvores super complexas que não generalizam bem os dados.
  - NP-completo
  - São modelos instáveis (alta variância), pequena variações nos dados de treino podem resultar em árvores completamente distintas.
- - os algoritmos de árvore de decisão são baseados em algoritmos heurísticos, como o algoritmo guloso, em que decisões locais ótimas são tomadas em cada nó. Tais algoritmos não podem garantir o retorno da árvore de decisão ótima globalmente. Isso pode ser atenuado pelo treinamento de várias árvores em um aprendiz conjunto, onde os recursos e amostras são amostrados aleatoriamente com a substituição.
+ - os algoritmos de árvore de decisão são baseados em algoritmos heurísticos (buscam o melhor caminho e não a melhor solução), como o algoritmo guloso, em que decisões locais ótimas são tomadas em cada nó. Tais algoritmos não podem garantir o retorno da árvore de decisão ótima globalmente. Isso pode ser atenuado pelo treinamento de várias árvores em um aprendiz conjunto, onde os recursos e amostras são amostrados aleatoriamente com a substituição.
 
  - Teoria da entropia
  - Calculo de entropia com probabilidade
