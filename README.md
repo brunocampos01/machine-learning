@@ -45,32 +45,29 @@ Podemos usar modelos matemáticos para ser as regras de aprendizado:
 
 ---
 # Unsupervised Learning
-Aprendizado não supervisionado é quando temos apenas dados X, sem os pares y. Nesse tipo de regime, estamos tentando achar alguma estrutura nos dados
-<br/>
-os dados X quase sempre vem corrompidos com ruído
-<br/>
-Algumas aplicações de AM não supervisionado são segmentação de consumidores (algoritmos de clusters), visualização de dados multidimensionais, compressão de dados e análise de mídias sociais. 
+Aprendizado não supervisionado é quando temos apenas dados X, sem os pares y. Nesse tipo de regime, estamos tentando achar alguma estrutura nos dados<br/>
+Algumas aplicações de unsupervised learning são segmentação de consumidores (algoritmos de clusters), visualização de dados multidimensionais, compressão de dados e análise de mídias sociais. 
 <br/>
 - Clustering
- - Clustering hierarquico
- - Modelos de mistura de gaussianas e validação de cluster
- - Dimensionamento de atributos
- - Análise de componentes principais
+- Clustering hierarquico
+- Modelos de mistura de gaussianas e validação de cluster
+- Dimensionamento de atributos
+- Análise de componentes principais
 
 ---
 # Reinforcement learning:
 O Aprendizado por reforço explora as _situações de aprendizagem_ a partir das interações.
 <br/>
 Algumas das aplicações de machine learning por reforço são construir oponentes em videogames, movimentação de robôs, simulações de ambientes complexos e aprender estratégias de trade no mercado financeiro.<br/>
- - A estrutura da aprendizagem por reforço: o problema
- - A estrutura da aprendizagem por reforço: a solução
- - Programação dinâmica
- - Métodos de Monte Carlo
- - Métodos de diferença temporal (TD)
- - Aprendizagem por reforço em espaços contínuos
- - Aprendizado-Q profundo
- - Gradientes de política
- - Métodos ator-críticos
+- A estrutura da aprendizagem por reforço: o problema
+- A estrutura da aprendizagem por reforço: a solução
+- Programação dinâmica
+- Métodos de Monte Carlo
+- Métodos de diferença temporal (TD)
+- Aprendizagem por reforço em espaços contínuos
+- Aprendizado-Q profundo
+- Gradientes de política
+- Métodos ator-críticos
 
 
 
