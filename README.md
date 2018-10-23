@@ -25,23 +25,23 @@ Resumindo, qualquer problema em que se busca prever uma variável `y` a partir d
 
 Podemos usar modelos matemáticos para ser as regras de aprendizado:
 * ## Linear regression
-    * [Papyrus]()
-    * [Exercices]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/linear_regression)
+    * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/linear_regression/exercices)
 - ## Perceptrons
-    * [Papyrus]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/perceptron)
     * [Exercices]()
 * ## Decision tree
-    * [Papyrus]()
-    * [Exercices]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/decision_tree)
+    * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/decision_tree/exercices)
 * ## Naive bayes
-    * [Papyrus]()
-    * [Exercices]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/naive_bayes)
+    * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/naive_bayes/exercices)
 * ## Suport Vectorial Machine
-     * [Papyrus]()
+     * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/SVM)
      * [Exercices]()
 * ## Ensembles methods
-     * [Papyrus]()
-     * [Exercices]()
+     * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/ensemble)
+     * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/ensemble/exercices)
 
 ---
 # Unsupervised Learning
