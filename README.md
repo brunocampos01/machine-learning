@@ -1,4 +1,8 @@
 
+# Machine Learning
+[![Python 3.7](https://img.shields.io/badge/python-3.7-yellow.svg)](https://www.python.org/downloads/release/python-371/)
+![License](https://img.shields.io/badge/Code%20License-MIT-blue.svg)
+
 # What is machine learning ?
 Basicamente, em computação, o aprendizado de máquina é sobre **aprender algumas propriedades** de um conjunto de dados e aplicá-las a novos dados. 
 
@@ -25,23 +29,23 @@ Resumindo, qualquer problema em que se busca prever uma variável `y` a partir d
 
 Podemos usar modelos matemáticos para ser as regras de aprendizado:
 * ## Linear regression
-    * [Papyrus]()
-    * [Exercices]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/linear_regression)
+    * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/linear_regression/exercices)
 - ## Perceptrons
-    * [Papyrus]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/perceptron)
     * [Exercices]()
 * ## Decision tree
-    * [Papyrus]()
-    * [Exercices]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/decision_tree)
+    * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/decision_tree/exercices)
 * ## Naive bayes
-    * [Papyrus]()
-    * [Exercices]()
+    * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/naive_bayes)
+    * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/naive_bayes/exercices)
 * ## Suport Vectorial Machine
-     * [Papyrus]()
+     * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/SVM)
      * [Exercices]()
 * ## Ensembles methods
-     * [Papyrus]()
-     * [Exercices]()
+     * [Papyrus](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/ensemble)
+     * [Exercices](https://github.com/brunocampos01/machine-learning-algorithms/tree/master/supervised_learning/ensemble/exercices)
 
 ---
 # Unsupervised Learning
