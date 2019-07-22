@@ -1,5 +1,6 @@
 
 # Machine Learning
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6269a8f50ae948a2bad6730a2fbe1a16)](https://app.codacy.com/app/brunocampos01/machine-learning-algorithms?utm_source=github.com&utm_medium=referral&utm_content=brunocampos01/machine-learning-algorithms&utm_campaign=Badge_Grade_Dashboard)
 [![Python 3.7](https://img.shields.io/badge/python-3.7-yellow.svg)](https://www.python.org/downloads/release/python-371/)
 ![License](https://img.shields.io/badge/Code%20License-MIT-blue.svg)
 
