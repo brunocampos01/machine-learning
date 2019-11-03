@@ -21,31 +21,7 @@ Basicamente a ideia de uma regressao linear é dar pequenos espaços entre os po
 
 ![png](images/output_9_0.png)
 
-## Errors
- - É a diferença entre o valor real e o valor predito.
- - Resíduo = erro médio absoluto
 
-![png](images/output_11_0.png)
-
-![png](images/output_12_0.png)
-
-#### É possivel calcular um erro médio quadrático.
-
-![png](images/output_14_0.png)
-
- - OBS: a única difrença para o que eu vi em técnicas estatíticas de predição foi a derivação da fórmula.
-
-## Comparison on types of errors
-
-![png](images/output_17_0.png)
-
-#### Erro médio absoluto:
- - indiferente da reta, sempre dará o mesmo tamanho de erro.
-
-#### Erro médio quadrático
- - Neste caso temos uma função de 2º grau, onde a linha B se encontra no ponto mais baixo.
-
-![png](images/output_20_0.png)
 
 ## Regressão Linear Multipla
 
