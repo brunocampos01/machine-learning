@@ -39,3 +39,9 @@ Parametric and Nonparametric Machine Learning Algorithms
 
 bias and variance:
 - Bias-Variance Trade-Off in Machine Learning: https://machinelearningmastery.com/gentle-introduction-to-the-bias-variance-trade-off-in-machine-learning/
+
+
+
+### Machine Learning Types
+
+Rule Extraction: Data is used as the basis for the extraction of propositional rules (antecedent/consequent aka if-then). Such rules may, but are typically not directed, meaning that the methods discover statistically supportable relationships between attributes in the data, not necessarily involving something that is being predicted. An example is the discovery of the relationship between the purchase of beer and diapers (this is data mining folk-law, true or not, it’s illustrative of the desire and opportunity).
