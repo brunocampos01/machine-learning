@@ -1,9 +1,25 @@
-## Summary
-### Basic
+# Summary
 - [probabilit_and_statistics](#probabilit_and_statistics)
-- [CRISP_DM](#crisp_dm)
 
-### Machine Learning
+## CRISP DM
+- Business Undertanding
+  - Determine business objectives
+  - Assess Situation
+- Data Undertanding
+  - Collect data
+  - Describe data
+  - Explore data
+  - Verify data
+- Data Preparation
+  - Clean
+  - Format
+  - Feature engineering
+  - Feature selection
+- Modeling
+- Evaluation
+- Deployment
+
+## Machine Learning
 - [linear_models](#linear_models)
 - [naive_bayes](#naive_bayes)
 - [decision_tree](#decision_tree)
@@ -11,11 +27,15 @@
 - [ensemble](#ensemble)
 - [reinforcement_learning](#reinforcement_learning)
 
-### Deep Learning
+## Deep Learning
 - [Perceptros](#perceptros)
 - [Neural Networks](#neural-networks)
 
+<br/>
+
 ---
+
+<br/>
 
 ## Probability
 ...
@@ -25,26 +45,22 @@
 
 
 ## CRISP-DM
-...
 
-#### Identificar o problema
-Há muitos tipos diferentes de questões que podem ser resolvidos pela ciência de dados. Exemplos incluem insights sobre doenças, previsões de vendas e falhas de hardware. Uma empresa que se depara com uma pergunta que pode ser respondida com o uso de dados pode decidir contratar uma equipe de ciência de dados para resolver o problema.
-No exemplo de sua empresa, o problema relacionado aos negócios é que o estoque de vassouras acaba antes do fim do mês. Portanto, a empresa busca repor o estoque de vassouras de acordo com a previsão de vendas de vassouras.
-
-### Definir as metas do projeto
-A definição das metas e dos objetivos do projeto começa com perguntas específicas e relevantes para entender o escopo do projeto. Sua empresa deseja resolver o problema com as vendas de vassouras, mas o escopo do projeto precisa ser definido primeiro. No âmbito do projeto, a empresa e sua equipe de ciência de dados precisam definir metas e objetivos, como identificar uma data limite e os marcos do projeto.
-
-### Identificar as fontes de dados
-A maioria das empresas tem uma enorme quantidade de dados, portanto, é essencial decidir quais tipos de dados são necessários para o projeto. Em seguida, é preciso determinar o local em que eles são armazenados e como obter acesso aos dados. Dependendo do local em que sua empresa armazena os dados, cabe aos engenheiros de dados obter os dados da fonte de dados da empresa, limpar os dados e entregá-los ao cientista de dados.
+<img src="images/crips_dm.png" align="center" height=auto width=100%/>
 
 
-### Bizus
-Vencedores de competições de data science fazem suas modelagens sempre pensando em qual modelo vão usar. Por exemplo:
-- modelos baseados em trees
-- modelos lineares
+### Business Undertanding
+There are many different types of issues that can be resolved by data science. Examples include insights into illnesses, sales forecasts and hardware failures. A company that is faced with a question that can be answered with the use of data may decide to hire a data science team to solve the problem.
+In your company's example, the business-related problem is that the broom stock runs out before the end of the month. Therefore, the company seeks to replenish the broom stock according to the broom sales forecast.
 
+**Example**: A nonprofit organization that survives on fundraising will start contacting people to request donations. However, there are few collaborators and the latest attempts have not yielded an expected result. For this reason, the organization decided to carry out a data mining project based on the success criteria of the project: better assertiveness in financial funding. Knowing the remuneration of an individual can help the organization (since it is possible to redirect a percentage of the Income Tax to donations through the FIA - Childhood and Adolescence Fund) to make the most appropriate requests for a request for support and collaboration, or even if they really should get in touch with the person, then this is the criterion for successful mining.
 
-### Prepare Environment
+### Determine business objectives
+The definition of project goals and objectives begins with specific and relevant questions to understand the scope of the project. Your company wants to solve the problem with broom sales, but the scope of the project needs to be defined first. Within the scope of the project, the company and its data science team need to define goals and objectives, such as identifying a deadline and milestones for the project.
+
+### Assess Situation
+In this step prepare resources how, enviroment, libraries, directory structure.
+
 #### Directory Structure
 ```
 ├── setup.py           <- Make this project pip installable with `pip install -e`
@@ -146,6 +162,22 @@ def change_dir_work(end_directory: str='notebooks'):
     
     return f'Current working directory: {curr_dir}'
 ```
+
+
+
+### Bizus
+Winners of data science competitions do their modeling always thinking about which model they will use. For example:
+- tree-based models
+- linear models
+
+---
+
+## Data Understanding
+
+### Collect Initial Data
+Most companies have an enormous amount of data, so it is essential to decide what types of data are needed for the project. Next, you need to determine where they are stored and how to gain access to the data. Depending on where your company stores the data, it’s up to data engineers to get the data from the company’s data source, clear the data and hand it over to the data scientist.
+
+---
 
 ---
 
