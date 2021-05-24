@@ -4,13 +4,14 @@
 
 ## CRISP DM
 - [Business Undertanding](#)
-  - [Determine business objectives](#)
+  - [Determine business objectives](#determine-business-objectives)
   - [Assess Situation](#)
 - [Data Undertanding](#)
-- [Basic]
-- [Irrelevant Data](#)
-- [Split Features](#)
-- [Exploratory Analysis: Statistic](#)
+  - [Describe Data](#)
+  - [Collect Initial Data](#)
+  - [Irrelevant Data](#)
+  - [Split Features](#)
+  - [Exploratory Analysis: Statistic](#)
 - [Data Preparation](#)
   - [Name Adaption of Features](#Name Adaption of Features)
   - [Strip and Lower](#Strip and Lower)
@@ -22,9 +23,6 @@
   - [Missing Values]
   - [Fixing Data Types]
   - [Outliers]
-
-
- 
   - [Feature Engineering](#)
   - [Feature Selection](#)
 - [Modeling](#)
@@ -73,7 +71,7 @@ The definition of project goals and objectives begins with specific and relevant
 ### Assess Situation
 In this step prepare resources how, enviroment, libraries, directory structure.
 
-#### Directory Structure
+#### Pattern Directory Structure
 ```
 ├── setup.py           <- Make this project pip installable with `pip install -e`
 │  
@@ -176,7 +174,7 @@ def change_dir_work(end_directory: str='notebooks'):
 ```
 
 
-## Graphics Format
+### Graphics Format
 ```python
 config = configparser.ConfigParser()
 config.read('src/visualization/plot_config.ini')
@@ -350,6 +348,24 @@ Winners of data science competitions do their modeling always thinking about whi
 
 ## Data Understanding
 
+### Describe Data
+First, you'll want to answer a set of basic questions about the dataset:
+
+- How many observations do I have?
+- How many features?
+- What are the data types of my features? Are they numeric? Categorical?
+- Do I have a target variable?
+
+<img src="images/organic.png" align="center" height=auto width=80%/>
+
+<br/>
+
+#### Ways to Explore Data
+
+<img src="images/way_to_explore.png" align="center" height=auto width=80%/>
+
+<br/>
+
 ### Collect Initial Data
 Most companies have an enormous amount of data, so it is essential to decide what types of data are needed for the project. Next, you need to determine where they are stored and how to gain access to the data. Depending on where your company stores the data, it’s up to data engineers to get the data from the company’s data source, clear the data and hand it over to the data scientist.
 
@@ -462,24 +478,6 @@ list_columns = get_col(df=df_callcenter,
 
 <br/>
 <br/>
-
-### Basic
-First, you'll want to answer a set of basic questions about the dataset:
-
-- How many observations do I have?
-- How many features?
-- What are the data types of my features? Are they numeric? Categorical?
-- Do I have a target variable?
-
-<img src="images/organic.png" align="center" height=auto width=80%/>
-
-<br/>
-
-# Ways to explore data
-<img src="images/way_to_explore.png" align="center" height=auto width=80%/>
-
-
-
 
 ### Measures Central Trend 
 
