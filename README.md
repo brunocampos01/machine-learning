@@ -1,23 +1,35 @@
 # Summary
-- [probabilit_and_statistics](#probabilit_and_statistics)
+- [probability](#probability)
+- [statistics](#statistics)
 
 ## CRISP DM
-- Business Undertanding
-  - Determine business objectives
-  - Assess Situation
-- Data Undertanding
-  - Collect data
-  - Describe data
-  - Explore data
-  - Verify data
-- Data Preparation
-  - Clean
-  - Format
-  - Feature engineering
-  - Feature selection
-- Modeling
-- Evaluation
-- Deployment
+- [Business Undertanding](#)
+  - [Determine business objectives](#)
+  - [Assess Situation](#)
+- [Data Undertanding](#)
+- [Basic]
+- [Irrelevant Data](#)
+- [Split Features](#)
+- [Exploratory Analysis: Statistic](#)
+- [Data Preparation](#)
+  - [Name Adaption of Features](#Name Adaption of Features)
+  - [Strip and Lower](#Strip and Lower)
+  - [Set Index](#Set Index)
+  - [Feature Selection](#)
+  - [One-hot-encoding]
+  - [Map Columns Values]
+  - [Duplicate Records]
+  - [Missing Values]
+  - [Fixing Data Types]
+  - [Outliers]
+
+
+ 
+  - [Feature Engineering](#)
+  - [Feature Selection](#)
+- [Modeling](#)
+- [Evaluation](#)
+- [Deployment](#)
 
 ## Machine Learning
 - [linear_models](#linear_models)
@@ -164,23 +176,6 @@ def change_dir_work(end_directory: str='notebooks'):
 ```
 
 
-
-### Bizus
-Winners of data science competitions do their modeling always thinking about which model they will use. For example:
-- tree-based models
-- linear models
-
----
-
-## Data Understanding
-
-### Collect Initial Data
-Most companies have an enormous amount of data, so it is essential to decide what types of data are needed for the project. Next, you need to determine where they are stored and how to gain access to the data. Depending on where your company stores the data, it’s up to data engineers to get the data from the company’s data source, clear the data and hand it over to the data scientist.
-
----
-
----
-
 ## Graphics Format
 ```python
 config = configparser.ConfigParser()
@@ -312,7 +307,7 @@ warnings.filterwarnings('ignore')
 pp = pprint.PrettyPrinter(indent=4)
 ```
 
-### Hiden Code 
+### Auxiliary Code to Hide the Code in Jupyter
 ```javascript
 %%html
 
@@ -346,6 +341,18 @@ $(document).ready(code_display);
 </form>
 ``` 
 
+### Bizus
+Winners of data science competitions do their modeling always thinking about which model they will use. For example:
+- tree-based models
+- linear models
+
+---
+
+## Data Understanding
+
+### Collect Initial Data
+Most companies have an enormous amount of data, so it is essential to decide what types of data are needed for the project. Next, you need to determine where they are stored and how to gain access to the data. Depending on where your company stores the data, it’s up to data engineers to get the data from the company’s data source, clear the data and hand it over to the data scientist.
+
 ### Load and Save Dataset
 - Load
 ```python
@@ -374,75 +381,6 @@ def save_data(df: 'dataframe' = None,
 # CPU times: user 8.44 ms, sys: 14 µs, total: 8.45 ms
 ```
 
----
-
-## Preprocessing
-
-<img src="images/data_cleaning.png" align="center" height=auto width=80%/>
-
-<br/>
-<br/>
-
-### Name Adaption of Features
-- strip() in features names
-- Name dont must capitalize
-- lower case
-- without spaces
-
-#### Strip and Lower
-```python
-print(df.columns)
-# [' contactsId', 'contactsName   ', 'contactsDateCreated','CONTACTSCreatedBy']
-```
-
-```python
-formated_columns = [col.strip().lower() for col in contacts.columns]
-df.columns = formated_columns
-
-print(df.columns)
-# ['contactsid', 'contactsname', 'contactsdatecreated', 'contactscreatedby']
-```
-
-### Set Index
-```python
-display(df)
-#   month	year	sale
-# 0	   1	2012	55
-# 1	   4	2014	40
-# 2	   7	2013	84
-# 3    10	2014	31
-```
-
-```python
-df.set_index('month')
-# 	    year	sale
-# month		
-# 1	    2012	55
-# 4	    2014	40
-# 7	    2013	84
-# 10	2014	31
-```
-
-```python
-df.set_index(['year', 'month'])
-# 	          sale
-# year	month	
-# 2012	   1	55
-# 2014	   4	40
-# 2013	   7	84
-# 2014	   10	31
-```
-
-```python
-df.set_index([pd.Index([1, 2, 3, 4]), 'year'])
-# 	       month	sale
-#   year		
-# 1	2012	   1	55
-# 2	2014	   4	40
-# 3	2013	   7	84
-# 4	2014	   10	31
-```
-
 
 ### Irrelevant Data
 Irrelevant observations are those that **don’t actually fit the specific problem** that you’re trying to solve.
@@ -467,7 +405,16 @@ def show_categorical_values(df: 'DataFrame', *columns: list) -> None:
 ```
 
 
-### Split Features
+
+
+### Categorical ---> Numerical
+Statistical learning algorithms work only with **numerical values**.
+
+#### Efect of Algoritms
+- Ótimo para modelos de tree
+- Confuso para linear models
+
+#### Split Features
 - Numerical cols
 - Categorical cols
 - All cols
@@ -507,923 +454,7 @@ list_columns = get_col(df=df_callcenter,
 
 <br/>
 
-### Categorical ---> Numerical
-Statistical learning algorithms work only with **numerical values**.
-
-#### Efect of Algoritms
-- Ótimo para modelos de tree
-- Confuso para linear models
-
-<br/>
-
-### One-hot-encoding
-<img src="images/one_hot_encoding.png" align="center" height=auto width=80%/>
-
-<br/>
-
-#### Example 01
-<img src="images/example_one_hot_econding.png" align="center" height=auto width=80%/>
-
-<br/>
-
-#### Example 02
-<img src="images/example_02_one_hot_enconding.png" align="center" height=auto width=80%/>
-
-<br/>
-<br/>
-
-### Map Columns Values
-```python
-# I used the dictionary because they are more efficient in these cases
-# https://stackoverflow.com/questions/22084338/pandas-dataframe-performance
-
-def generate_dict_by_col(df: 'dataframe', *columns: list) -> dict:
-    """
-    :return:
-        Return a dict with label of each column 
-    """
-    dict_unique = {}
-    
-    for column in columns:
-        list_unique = df[column].unique().tolist()
-        dict_column = {}
-    
-        for element in list_unique:
-            if isinstance(element, float) is True:  # type nan is float
-                continue
-            dict_column[element] = int(list_unique.index(element))
-        # add dict column in principal dict 
-        dict_unique[column] = dict_column          
-    
-    print("-"*25, "Dictionary with Values Map by Column", "-"*25, end='\n\n')
-    return dict_unique
-```
-
-```python
-dict_cat_unique = generate_number_by_col(df_callcenter, 
-                                         *list_categorical_col)
-
-pp.pprint(dict_cat_unique)
-# -------------- Dictionary with Values Map by Column ------------
-
-# {   'campanha_anterior': {'fracasso': 1, 'nao_existente': 0, 'sucesso': 2},
-#     'dia_da_semana': {'qua': 2, 'qui': 3, 'seg': 0, 'sex': 4, 'ter': 1},
-#     'educacao': {   'analfabeto': 7,
-#                     'curso_tecnico': 4,
-#                     'ensino_medio': 1,
-#                     'fundamental_4a': 0,
-#                     'fundamental_6a': 2,
-#                     'fundamental_9a': 3,
-#                     'graduacao_completa': 6},
-#     'emprestimo_moradia': {'nao': 0, 'sim': 1},
-#     'emprestimo_pessoal': {'nao': 0, 'sim': 1},
-#     'estado_civil': {'casado': 0, 'divorciado': 2, 'solteiro': 1},
-#     'inadimplente': {'nao': 0, 'sim': 2},
-#     'meio_contato': {'celular': 1, 'telefone': 0},
-#     'mes': {   'abr': 8,
-#                'ago': 3,
-#                'dez': 6,
-#                'jul': 2,
-#                'jun': 1,
-#                'mai': 0,
-#                'mar': 7,
-#                'nov': 5,
-#                'out': 4,
-#                'set': 9},
-#     'profissao': {   'admin.': 2,
-#                      'aposentado': 5,
-#                      'colarinho_azul': 3,
-#                      'desempregado': 7,
-#                      'dona_casa': 0,
-#                      'empreendedor': 10,
-#                      'estudante': 11,
-#                      'gerente': 6,
-#                      'informal': 8,
-#                      'servicos': 1,
-#                      'tecnico': 4},
-#     'resultado': {'nao': 0, 'sim': 1}}
-```
-
----
-
-### Duplicate Records
-Can receive when:
-- Combine datasets from multiple places
-- Scrape data
-- Receive data from clients/other departments
-
-**NOTE:** Always analyze if the repeated values are not super coincidences.
-<img src="images/duplicate_data.png" align="center" height=auto width=80%/>
-
-<br/>
-
-```python
-# duplicated()
-
-def check_quat_duplicated_data(df: 'DataFrame') -> None:
-    """
-    Check if contains duplicated data
-    Mark duplicates as ``True`` if enough row equal
-    Except for the first occurrence.    
-    """
-    duplicated = df.duplicated().sum()
-    total_lines = df.shape[0]
-    percentage = (duplicated/total_lines) * 100
-    
-    print("-"*25, "DUPLICATED DATA", "-"*25,)
-    print("\nSHAPE of data: {}".format(df.shape[0]))
-    print("TOTAL duplicated data: {}".format(duplicated))
-    print("PERCENTAGE duplicated data: {} %".format(percentage)) 
-```
-
-```python
-check_quat_duplicated_data(df_callcenter)
-
-# ------------------------- DUPLICATED DATA -------------------------
-
-# SHAPE of data: 41188
-# TOTAL duplicated data: 0
-# PERCENTAGE duplicated data: 0.0 %
-```
-
-<br/>
-
-#### % Duplicated Values
-```python
-# % duplicated values
-
-duplicated = dataframe.duplicated().sum()
-total_cells = np.product(dataframe.shape)
-
-print("In dataset dataframe has {}% of duplicated values.".format((duplicated/total_cells) * 100))
-```
-
-<br/>
-
-#### Create dataframe only duplicated values
-```python
-dataframe[dataframe.duplicated(keep=False)]
-```
-
-#### Create Tag Duplicated Values
-```python
-def calcule_duplicated_values(df_in):
-    """
-    Return dataframe with columns contains duplicated values
-    """
-    # Total
-    duplicated = dataframe.duplicated().sum()
-    print('Total of duplicated values: {}' .format(duplicated))
-
-    # Create column 
-    df_duplicated = df_in[df_in.duplicated(keep=False)]
-    df_in['duplicated_values'] = None    # first create empty column 
-    
-    # Insert new column in df
-    df_in['duplicated_values'] = df_duplicated
-    
-    # Replace None by 0
-    df_in['duplicated_values'] = df_in['duplicated_values'].replace(np.nan, 0, regex=True)    
-
-calcule_duplicated_values(dataframe)
-```
-
-<br/>
-
----
-
-### Missing Values
-**You cannot simply ignore missing values in your dataset.** You must handle them in some way.
-
-**ASK:** Is a missing data because it was not recorded or because it does not exist?
-<br/>
-To answer this question, it is necessary to analyze the fields without data.
-
-
-### Check Values Missing
-```python
-# return TRUE if collumn contains values missing
-
-missing = dataframe.isnull().any()
-print(missing)
-
-# account_key          False
-# status               False
-# join_date            False
-# cancel_date           True
-# days_to_cancel        True
-# is_udacity           False
-# is_canceled          False
-# duplicated_values    False
-# dtype: bool
-```
-
-```python
-dataframe.isnull().sum()
-
-# account_key            0
-# status                 0
-# join_date              0
-# cancel_date          652
-# days_to_cancel       652
-# is_udacity             0
-# is_canceled            0
-# duplicated_values      0
-# missing_values         0
-# dtype: int64
-```
-
-```python
-# isnull()
-
-def check_columns_missing_val(df: 'DataFrame'):
-    """
-    Return TRUE, if collumn contains values missing
-    """
-    list_columns_missing = []
-    
-    for index, value in enumerate(df.isnull().any()):
-        if value is True:
-            list_columns_missing.append(df.columns[index])
-    
-    if len(list_columns_missing) > 0:
-        print("Columns's name with missing values:")
-        return list_columns_missing   
-    
-    return "The dataframe NOT contains missing values."
-```
-```python
-# df.isnull().sum().sum()
-
-def check_quat_missing_data(df: 'DataFrame', columns_m_v: list) -> None:
-    """
-    Check if contains missing data
-    Mark missing, if line contains NaN in any column
-    """    
-    missing_values_count = df.isnull().sum()
-    total_missing = missing_values_count.sum()
-    total_lines = df.shape[0]
-    total_cells = np.product(df.shape)
-        
-    percentage_by_line = (total_missing/total_lines) * 100
-    percentage_by_cell = (total_missing/total_cells) * 100
-    
-    # by column
-    quant_missing_by_column = df[columns_m_v].isnull().sum()
-    percentage_missing_by_column = (quant_missing_by_column/total_lines) * 100
-    
-    print("-"*25, "MISSING VALUES", "-"*25)
-    print("\nSHAPE of data: {}".format(df.shape[0]))
-    print("TOTAL missing values: {}".format(total_missing))
-    print("TOTAL missing values by column:\n{}\n".format(quant_missing_by_column))
-    
-    print("PERCENTAGE missing values by cell: {:2.3} %".format(percentage_by_cell))
-    print("PERCENTAGE missing values by row: {:2.3} %".format(percentage_by_line))
-    print("PERCENTAGE missing values by column:\n{}".format(percentage_missing_by_column)) 
-
-# ------------------------- MISSING VALUES -------------------------
-
-# SHAPE of data: 41188
-# TOTAL missing values: 95094
-# TOTAL missing values by column:
-# profissao               330
-# estado_civil             80
-# educacao               1731
-# inadimplente           8597
-# emprestimo_moradia      990
-# emprestimo_pessoal      990
-# mes                   41188
-# dia_da_semana         41188
-# dtype: int64
-
-# PERCENTAGE missing values by cell: 11.0 %
-# PERCENTAGE missing values by row: 2.31e+02 %
-# PERCENTAGE missing values by column:
-# profissao              1
-# estado_civil           0
-# educacao               4
-# inadimplente          21
-# emprestimo_moradia     2
-# emprestimo_pessoal     2
-# mes                  100
-# dia_da_semana        100
-# dtype: float64
-```
-
-#### Create Tag Missing Values
-```python
-def calcule_missing_values(df_in):
-    """
-    Return dataframe with columns contains missing values
-    """
-    # Total
-    total_missing_values = df_in.isnull().sum().sum()
-    print('Total of missing values: {}' .format(total_missing_values))
-    
-    # Columns
-    missing_value_columns = df_in.columns[dataframe.isnull().any()].tolist()
-    print('Columns with missing values: {}' .format(missing_value_columns))
-
-    # Create column 
-    df_null = df_in[df_in.isnull().any(axis=1)]
-    df_in['missing_values'] = None    # first create empty column 
-    
-    # Insert new column in df
-    df_in['missing_values'] = df_null
-    
-    # Replace None by 0
-    df_in['missing_values'] = df_in['missing_values'].replace(np.nan, 0, regex=True)
-    
-    # Convert values in integer
-    df_in['missing_values'] = df_in['missing_values'].astype(str)
-    
-
-calcule_missing_values(dataframe)
-
-# Total of missing values: 1304
-# Columns with missing values: ['cancel_date', 'days_to_cancel']
-```
-
-_Before observation missing values is necessary take decision if **remove** or **keep** missing values._
-
-## Handler Missing Values
-
-1. Dropping
-2. Replacing by value out of distribuition
-3. Apply mean or mode
-4. Reconstruct values
-5. Label
-
-### Missing categorical data
-- Apply **mode**
-- Label values as `missing`
-- Subistituir por algum valor fora do intervalo de distribuition
-
-### Missing numeric data
-- Apply **mean**
-- The easy way `value = 0`.
-
-### Note
-- xgBoost working with missing values
-
-
-### Dropping `dropna()`
-- Remove rows : `dataframe.dropna()`
-- Remove colluns: `dataframe.dropna(axis=1)`
-
-#### Note
-axis=0 : row
-<br/>
-axis=1 : column
-
-<img src="images/dropna.png" align="center" height=auto width=80%/>
-
-<br/>
-
-### Replacing by value out of distribuition `fillna()`
-
- - Eg: `-999`, `-1`, ...
- - **BAD**:  neural networks.
-
-<img src="images/fillna.png" align="center" height=auto width=80%/>
-
-<br/>
-
-### Apply mean or mode `fillna()`
- - **GOOD**: linear models and neural networks.
- - **BAD**:  para as tree, pode ser mais difícil selecionar o objeto que tinha missing values, logo de início.
-
-<br/>
-
-### Reconstruct values
-
-Replace using an algorithm. the forecasting model is one of the sophisticated methods for dealing with missing data. Here, we create a predictive model to estimate values that will replace missing data. In this case, we divided our data set into two sets: one set with no missing values for the variable and one with missing values. The first data set becomes the model's training data set, while the second data set with missing values is the test data set and the variable with missing values is treated as the target variable.
-   - KNN using the neighbors.
-   - Logistic regression
-
-<br/>
-
-### Label `fillna() `
- - **GOOD**: trees and neural networks
- - **BAD**: increase columns numbers.
-
-<img src="images/label_missing_values.png" align="center" height=auto width=80%/>
-
-<br/>
-<br/>
-
-### Linear Interpolation
- - Times series
-
-<img src="images/interpolation.png" align="center" height=auto width=80%/>
-
-<br/>
-<br/>
-
-### Fixing Data Types
-- data conversion 
-- It is recommended to treat missing values first
-
-```python
-deals['dealsDateCreated'] = pd.to_datetime(deals['dealsDateCreated'], 
-                                           yearfirst=False)
-
-#Transform string to date
-data['date'] = pd.to_datetime(data.date, format="%d-%m-%Y")
-
-#Extracting Year
-data['year'] = data['date'].dt.year
-
-#Extracting Month
-data['month'] = data['date'].dt.month
-
-#Extracting the weekday name of the date
-data['day_name'] = data['date'].dt.day_name()
-```
-
-```python
-pd.to_numeric(deals['dealsPrice'], 
-              errors='ignore', 
-              downcast='integer')
-
-deals['dealsPrice'].astype(dtype='int32', 
-                           errors='ignore')
-
-deals['dealsId'].astype(str)                        
-```
-
-```python
-def handler_typing(df: 'dataframe', type_col: str, list_cont_feature: list, *columns: list):
-    for column in columns:
-        if column in list_cont_feature:
-            print(column)
-            df[column] = df[column].map('{:,.2f}'.format) \
-                        .astype(float) # object -> float
-            continue
-            
-        df[column] = df[column].astype(dtype=type_col, errors='raise')
-    
-    return df.info(), display(df.head())
-```
-```python
-list_cont_feature = ['indice_precos_consumidor',
-                     'indice_confianca_consumidor',
-                     'euribor3m']
-
-handler_typing(df_callcenter, 'int16', list_cont_feature, *list_columns)
-```
-<br/>
-
----
-
-
-## Preprocessing - outliers
-```
-Better Data > Fancier Algorithms
-```
-- Check if contains outliers
-- Count outliers
-- Check percentage
-- Plot outliers
-- Handler outliers
-  - drop
-  - mark
-  - rescale
-- In general, if you have a **legitimate** reason to remove an outlier, it will help your model’s performance.
-- However, outliers are innocent until proven guilty. **You should never remove an outlier just because it’s a "big number." **
-
-```python
-# quantile()
-
-dict_quantile = {}
-
-def calculate_quantile_by_col(df: 'dataframe', *columns: list) -> None:
-    """
-    Calculate boxplot
-    """
-    for column in columns:
-        dict_col = {}
-       
-        q1 = df[column].quantile(0.25)
-        q3 = df[column].quantile(0.75)
-        iqr = q3 - q1  # Interquartile range
-
-        dict_col[column] = {'q1': q1,
-                            'q3': q3,
-                            'iqr': iqr}
-        # add dict column in principal dict
-        dict_quantile.update(dict_col)
-```
-```python
-def calculate_fence(dict_col: 'dataframe', *columns: list) -> None:
-    for column in columns:
-        dict_actual_col = dict_col[column]  # mount internal dict of dict_quantile
-        dict_fence = {}  # auxiliar dict
-        
-        fence_low  = dict_actual_col['q1'] - 1.5 * dict_actual_col['iqr']
-        fence_high = dict_actual_col['q3'] + 1.5 * dict_actual_col['iqr']
-        
-        dict_fence = {'fence_low': fence_low,
-                     'fence_high': fence_high}
-        
-        # add dict column in principal dict
-        dict_col[column].update(dict_fence)
-```
-```python
-def count_outlier(df: 'dataframe', dict_quantile: dict, *columns: list):
-    for column in columns:
-        # mount internal dict of dict_quantile
-        dict_actual_col = dict_quantile[column]
-
-        outlier_less_q1 = (df[column] < dict_actual_col['fence_low']).sum()  # numpy.int64
-        outlier_more_q3 = (df[column] > dict_actual_col['fence_high']).sum()  # numpy.int64
-        total = outlier_less_q1 + outlier_more_q3
-        
-        dict_outlier = {'outlier_less_q1': outlier_less_q1,
-                        'outlier_more_q3': outlier_more_q3,
-                        'outlier_total': total}
-        
-        # add dict column in principal dict
-        dict_quantile[column].update(dict_outlier)
-        
-    print("-"*25, "Dict Quantilie", "-"*25, end='\n\n')
-    return pp.pprint(dict_quantile)
-```
-
-```python
-def check_percentage_outlier(df: 'dataframe', dict_quantile: dict, *columns: list):
-    outlier_total = 0
-    total_lines = df.shape[0]
-    total_cells = np.product(df.shape)
-    
-    print("-"*15, "OUTLIERS", "-"*15)
-    print("\nSHAPE of data: {}".format(df.shape[0]))
-    print("\nPERCENTAGE outlier by column:") 
-    
-    # by column
-    for column in columns:
-        dict_actual_col = dict_quantile[column]  # mount internal dict of dict_quantile
-        outlier_total += dict_actual_col['outlier_total']
-
-        quant_outlier_by_col = dict_actual_col['outlier_total']
-        percentage_outlier_by_col = (quant_outlier_by_col/total_lines) * 100
-        
-        print("{}: {:4.4} %".format(column, percentage_outlier_by_col)) 
-
-        
-    percentage_by_line = (outlier_total/total_lines) * 100
-    percentage_by_cell = (outlier_total/total_cells) * 100
-        
-    print("PERCENTAGE outlier by line: {:2.3} %".format(percentage_by_line))
-    print("PERCENTAGE outlier by cell: {:2.3} %".format(percentage_by_cell))
-    print("\nTOTAL outlier: {}".format(outlier_total))
-```
-
-```python
-# run
-calculate_quantile_by_col(df_callcenter_cleasing, *list_columns)
-calculate_fence(dict_quantile, *list_columns)
-count_outlier(df_callcenter_cleasing, dict_quantile, *list_columns)
-
-# ------------------------- Dict Quantilie -------------------------
-
-# {   'campanha_anterior': {   'fence_high': 0.0,
-#                              'fence_low': 0.0,
-#                              'iqr': 0.0,
-#                              'outlier_less_q1': 0,
-#                              'outlier_more_q3': 5625,
-#                              'outlier_total': 5625,
-#                              'q1': 0.0,
-#                              'q3': 0.0},
-#     'dia_da_semana': {   'fence_high': 7.0,
-#                          'fence_low': -1.0,
-#                          'iqr': 2.0,
-#                          'outlier_less_q1': 0,
-#                          'outlier_more_q3': 0,
-#                          'outlier_total': 0,
-#                          'q1': 2.0,
-#                          'q3': 4.0},
-#     'dias_ultimo_contato': {   'fence_high': 0.0,
-#                                'fence_low': 0.0,
-#                                'iqr': 0.0,
-#                                'outlier_less_q1': 0,
-#                                'outlier_more_q3': 1500,
-#                                'outlier_total': 1500,
-#                                'q1': 0.0,
-#                                'q3': 0.0},
-#     'duracao': {   'fence_high': 6.5,
-#                    'fence_low': 2.5,
-#                    'iqr': 1.0,
-#                    'outlier_less_q1': 1020,
-#                    'outlier_more_q3': 714,
-#                    'outlier_total': 1734,
-#                    'q1': 4.0,
-#                    'q3': 5.0},
-#     'educacao': {   'fence_high': 11.0,
-#                     'fence_low': -5.0,
-#                     'iqr': 4.0,
-#                     'outlier_less_q1': 0,
-#                     'outlier_more_q3': 0,
-#                     'outlier_total': 0,
-#                     'q1': 1.0,
-#                     'q3': 5.0},
-#     'emprestimo_moradia': {   'fence_high': 2.5,
-#                               'fence_low': -1.5,
-#                               'iqr': 1.0,
-#                               'outlier_less_q1': 0,
-#                               'outlier_more_q3': 0,
-#                               'outlier_total': 0,
-#                               'q1': 0.0,
-#                               'q3': 1.0},
-#     'emprestimo_pessoal': {   'fence_high': 0.0,
-#                               'fence_low': 0.0,
-#                               'iqr': 0.0,
-#                               'outlier_less_q1': 0,
-#                               'outlier_more_q3': 6248,
-#                               'outlier_total': 6248,
-#                               'q1': 0.0,
-#                               'q3': 0.0},
-#     'estado_civil': {   'fence_high': 2.5,
-#                         'fence_low': -1.5,
-#                         'iqr': 1.0,
-#                         'outlier_less_q1': 0,
-#                         'outlier_more_q3': 0,
-#                         'outlier_total': 0,
-#                         'q1': 0.0,
-#                         'q3': 1.0},
-#     'euribor3m': {   'fence_high': 10.39,
-#                      'fence_low': -4.09,
-#                      'iqr': 3.62,
-#                      'outlier_less_q1': 0,
-#                      'outlier_more_q3': 0,
-#                      'outlier_total': 0,
-#                      'q1': 1.34,
-#                      'q3': 4.96},
-#     'idade': {   'fence_high': 69.5,
-#                  'fence_low': 9.5,
-#                  'iqr': 15.0,
-#                  'outlier_less_q1': 0,
-#                  'outlier_more_q3': 468,
-#                  'outlier_total': 468,
-#                  'q1': 32.0,
-#                  'q3': 47.0},
-#     'inadimplente': {   'fence_high': 0.0,
-#                         'fence_low': 0.0,
-#                         'iqr': 0.0,
-#                         'outlier_less_q1': 0,
-#                         'outlier_more_q3': 3,
-#                         'outlier_total': 3,
-#                         'q1': 0.0,
-#                         'q3': 0.0},
-#     'indice_confianca_consumidor': {   'fence_high': -26.949999999999992,
-#                                        'fence_low': -52.150000000000006,
-#                                        'iqr': 6.300000000000004,
-#                                        'outlier_less_q1': 0,
-#                                        'outlier_more_q3': 446,
-#                                        'outlier_total': 446,
-#                                        'q1': -42.7,
-#                                        'q3': -36.4},
-#     'indice_precos_consumidor': {   'fence_high': 95.35499999999999,
-#                                     'fence_low': 91.715,
-#                                     'iqr': 0.9099999999999966,
-#                                     'outlier_less_q1': 0,
-#                                     'outlier_more_q3': 0,
-#                                     'outlier_total': 0,
-#                                     'q1': 93.08,
-#                                     'q3': 93.99},
-#     'meio_contato': {   'fence_high': 2.5,
-#                         'fence_low': -1.5,
-#                         'iqr': 1.0,
-#                         'outlier_less_q1': 0,
-#                         'outlier_more_q3': 0,
-#                         'outlier_total': 0,
-#                         'q1': 0.0,
-#                         'q3': 1.0},
-#     'mes': {   'fence_high': 12.5,
-#                'fence_low': 0.5,
-#                'iqr': 3.0,
-#                'outlier_less_q1': 0,
-#                'outlier_more_q3': 0,
-#                'outlier_total': 0,
-#                'q1': 5.0,
-#                'q3': 8.0},
-#     'numero_empregados': {   'fence_high': 5421.5,
-#                              'fence_low': 4905.5,
-#                              'iqr': 129.0,
-#                              'outlier_less_q1': 0,
-#                              'outlier_more_q3': 0,
-#                              'outlier_total': 0,
-#                              'q1': 5099.0,
-#                              'q3': 5228.0},
-#     'profissao': {   'fence_high': 7.0,
-#                      'fence_low': -1.0,
-#                      'iqr': 2.0,
-#                      'outlier_less_q1': 0,
-#                      'outlier_more_q3': 3752,
-#                      'outlier_total': 3752,
-#                      'q1': 2.0,
-#                      'q3': 4.0},
-#     'qtd_contatos_campanha': {   'fence_high': 2.5,
-#                                  'fence_low': -1.5,
-#                                  'iqr': 1.0,
-#                                  'outlier_less_q1': 0,
-#                                  'outlier_more_q3': 157,
-#                                  'outlier_total': 157,
-#                                  'q1': 0.0,
-#                                  'q3': 1.0},
-#     'qtd_contatos_total': {   'fence_high': 0.0,
-#                               'fence_low': 0.0,
-#                               'iqr': 0.0,
-#                               'outlier_less_q1': 0,
-#                               'outlier_more_q3': 5625,
-#                               'outlier_total': 5625,
-#                               'q1': 0.0,
-#                               'q3': 0.0},
-#     'resultado': {   'fence_high': 0.0,
-#                      'fence_low': 0.0,
-#                      'iqr': 0.0,
-#                      'outlier_less_q1': 0,
-#                      'outlier_more_q3': 4639,
-#                      'outlier_total': 4639,
-#                      'q1': 0.0,
-#                      'q3': 0.0}}
-```
-
-```python
-check_percentage_outlier(df_callcenter_cleasing, dict_quantile, *list_columns)
-
-# --------------- OUTLIERS ---------------
-
-# SHAPE of data: 41170
-
-# PERCENTAGE outlier by column:
-# idade: 1.137 %
-# profissao: 9.113 %
-# estado_civil:  0.0 %
-# educacao:  0.0 %
-# inadimplente: 0.007287 %
-# emprestimo_moradia:  0.0 %
-# emprestimo_pessoal: 15.18 %
-# meio_contato:  0.0 %
-# mes:  0.0 %
-# dia_da_semana:  0.0 %
-# duracao: 4.212 %
-# qtd_contatos_campanha: 0.3813 %
-# dias_ultimo_contato: 3.643 %
-# qtd_contatos_total: 13.66 %
-# campanha_anterior: 13.66 %
-# indice_precos_consumidor:  0.0 %
-# indice_confianca_consumidor: 1.083 %
-# euribor3m:  0.0 %
-# numero_empregados:  0.0 %
-# resultado: 11.27 %
-# PERCENTAGE outlier by line: 73.3 %
-# PERCENTAGE outlier by cell: 3.67 %
-
-# TOTAL outlier: 30197
-```
-
-## Plot Outliers
-Undertanding box-plot
-
-<img src="images/interquartile.png" align="center" height=auto width=80%/>
-
-<br/>
-
-<img src="images/outliers.png" align="center" height=auto width=80%/>
-
-<br/>
-
-<img src="images/quartis.png" align="center" height=auto width=80%/>
-
-```python
-import seaborn as sns
-sns.boxplot(x=df_callcenter['duracao'],
-            width=0.5)
-```
-
-```python
-def plot_box_plot(df: 'dataframe', data_set_name: str, xlim=None):
-    """
-    Creates a seaborn boxplot including all dependent
-    
-    Args:
-    data_set_name: Name of title for the boxplot
-    xlim: Set upper and lower x-limits
-    
-    Returns:
-    Box plot with specified data_frame, title, and x-limits 
-    """
-    fig, ax = plt.subplots(figsize=(18, 10))
-
-    if xlim is not None:
-        plt.xlim(*xlim)
-    
-    plt.title(f"Horizontal Boxplot {data_set_name}")
-        
-    plt.ylabel('Dependent Variables')
-    plt.xlabel('Measurement x')
-    ax = sns.boxplot(data = df,
-                    orient = 'h', 
-                    palette = 'Set2',
-                    notch = False, # box instead of notch shape 
-                    sym = 'rs')  # red squares for outliers
-
-    plt.show()
-```
-
-```python
-plot_box_plot(df_callcenter_cleasing, 
-              'Box Plot', 
-              (-60, 60))
-```
-<img src="images/box_plot_example.png" align="center" height=auto width=80%/>
-
-<br/>
-
-```python
-def show_boxplot(df, *columns):
-    for column in columns:
-        plt.figure (figsize = (17, 1)) 
-        sns.boxplot(x=df[column],
-                    width=0.3,
-                    linewidth=1.0,
-                    showfliers=True)
-
-show_boxplot(df_callcenter_cleasing, *list_columns)
-```
-
-#### Boxplot on a Normal Distribution
-The graph Normal ditribuition help understand a boxplot.
-
-<img src="images/normal_boxplot.png" align="center" height=auto width=80%/>
-
-<br/>
-<br/>
-
-#### Remove Outliers
-- Drop
-- Mark
-- Median
-- Rescale 
-
-<img src="images/Outlier_print.png" align="center" height=auto width=80%/>
-
-### Drop
-
-1. Select conditional
-  - `query()` process using `loc[]` and `eval()` 
-  - `loc()`
-
-2. Drop row
-  - `drop(axis=1)`
-
-
-#### Select conditional
-```python
-# query()
-# &, |, in, !
-
-df_result_query = df_callcenter.query('duracao == 0 & idade > 50',
-                                       inplace=False)
-
-# loc()
-cond = df_callcenter['duracao'] == 0
-cond2 = df_callcenter['idade'] > 50
-
-df_result_loc = df_callcenter.loc[cond & cond2]
-```
-
-#### Drop Row
-```python
-df_callcenter = df_callcenter.drop(df_result_query, axis=1)
-```
-
-<br/>
-
-### Mark
-Create feature `['outliers']` where:
-- 0 is not outlier
-- 1 is outlier
-
-```python
-# where()
-
-# Create feature based on boolean condition
-cond = df_callcenter['duracao'] < 600
-
-# Create feature 
-df_callcenter['outlier'] = np.where(cond, 0, 1)
-
-# Show data
-df_callcenter.head()
-```
-
-<br/>
-
----
-
-## Exploratory Analysis: Statistic
+#### Exploratory Analysis: Statistic
 ```
 "get to know the dataset"
 ```
@@ -1766,6 +797,983 @@ The test works by checking the means of two samples to see if they are significa
 At the end of the exploration **create the hypotheses and think about what to analyze**.
 
 Keep in mind, however, that better data often outperforms better algorithms, and designing good resources is a big step forward. And if you have a huge data set, any sorting algorithm used may not matter much in terms of sorting performance (choose your algorithm based on speed or ease of use).
+
+<br/>
+
+---
+
+## Data Preparation
+
+<img src="images/data_cleaning.png" align="center" height=auto width=80%/>
+
+<br/>
+<br/>
+
+### Name Adaption of Features
+- strip() in features names
+- Name dont must capitalize
+- lower case
+- without spaces
+
+#### Strip and Lower
+```python
+print(df.columns)
+# [' contactsId', 'contactsName   ', 'contactsDateCreated','CONTACTSCreatedBy']
+```
+
+```python
+formated_columns = [col.strip().lower() for col in contacts.columns]
+df.columns = formated_columns
+
+print(df.columns)
+# ['contactsid', 'contactsname', 'contactsdatecreated', 'contactscreatedby']
+```
+
+### Set Index
+```python
+display(df)
+#   month	year	sale
+# 0	   1	2012	55
+# 1	   4	2014	40
+# 2	   7	2013	84
+# 3    10	2014	31
+```
+
+```python
+df.set_index('month')
+# 	    year	sale
+# month		
+# 1	    2012	55
+# 4	    2014	40
+# 7	    2013	84
+# 10	2014	31
+```
+
+```python
+df.set_index(['year', 'month'])
+# 	          sale
+# year	month	
+# 2012	   1	55
+# 2014	   4	40
+# 2013	   7	84
+# 2014	   10	31
+```
+
+```python
+df.set_index([pd.Index([1, 2, 3, 4]), 'year'])
+# 	       month	sale
+#   year		
+# 1	2012	   1	55
+# 2	2014	   4	40
+# 3	2013	   7	84
+# 4	2014	   10	31
+```
+
+<br/>
+
+### One-hot-encoding
+<img src="images/one_hot_encoding.png" align="center" height=auto width=80%/>
+
+<br/>
+
+#### Example 01
+<img src="images/example_one_hot_econding.png" align="center" height=auto width=80%/>
+
+<br/>
+
+#### Example 02
+<img src="images/example_02_one_hot_enconding.png" align="center" height=auto width=80%/>
+
+<br/>
+<br/>
+
+### Map Columns Values
+```python
+# I used the dictionary because they are more efficient in these cases
+# https://stackoverflow.com/questions/22084338/pandas-dataframe-performance
+
+def generate_dict_by_col(df: 'dataframe', *columns: list) -> dict:
+    """
+    :return:
+        Return a dict with label of each column 
+    """
+    dict_unique = {}
+    
+    for column in columns:
+        list_unique = df[column].unique().tolist()
+        dict_column = {}
+    
+        for element in list_unique:
+            if isinstance(element, float) is True:  # type nan is float
+                continue
+            dict_column[element] = int(list_unique.index(element))
+        # add dict column in principal dict 
+        dict_unique[column] = dict_column          
+    
+    print("-"*25, "Dictionary with Values Map by Column", "-"*25, end='\n\n')
+    return dict_unique
+```
+
+```python
+dict_cat_unique = generate_number_by_col(df_callcenter, 
+                                         *list_categorical_col)
+
+pp.pprint(dict_cat_unique)
+# -------------- Dictionary with Values Map by Column ------------
+
+# {   'campanha_anterior': {'fracasso': 1, 'nao_existente': 0, 'sucesso': 2},
+#     'dia_da_semana': {'qua': 2, 'qui': 3, 'seg': 0, 'sex': 4, 'ter': 1},
+#     'educacao': {   'analfabeto': 7,
+#                     'curso_tecnico': 4,
+#                     'ensino_medio': 1,
+#                     'fundamental_4a': 0,
+#                     'fundamental_6a': 2,
+#                     'fundamental_9a': 3,
+#                     'graduacao_completa': 6},
+#     'emprestimo_moradia': {'nao': 0, 'sim': 1},
+#     'emprestimo_pessoal': {'nao': 0, 'sim': 1},
+#     'estado_civil': {'casado': 0, 'divorciado': 2, 'solteiro': 1},
+#     'inadimplente': {'nao': 0, 'sim': 2},
+#     'meio_contato': {'celular': 1, 'telefone': 0},
+#     'mes': {   'abr': 8,
+#                'ago': 3,
+#                'dez': 6,
+#                'jul': 2,
+#                'jun': 1,
+#                'mai': 0,
+#                'mar': 7,
+#                'nov': 5,
+#                'out': 4,
+#                'set': 9},
+#     'profissao': {   'admin.': 2,
+#                      'aposentado': 5,
+#                      'colarinho_azul': 3,
+#                      'desempregado': 7,
+#                      'dona_casa': 0,
+#                      'empreendedor': 10,
+#                      'estudante': 11,
+#                      'gerente': 6,
+#                      'informal': 8,
+#                      'servicos': 1,
+#                      'tecnico': 4},
+#     'resultado': {'nao': 0, 'sim': 1}}
+```
+
+---
+
+### Duplicate Records
+Can receive when:
+- Combine datasets from multiple places
+- Scrape data
+- Receive data from clients/other departments
+
+**NOTE:** Always analyze if the repeated values are not super coincidences.
+<img src="images/duplicate_data.png" align="center" height=auto width=80%/>
+
+<br/>
+
+```python
+# duplicated()
+
+def check_quat_duplicated_data(df: 'DataFrame') -> None:
+    """
+    Check if contains duplicated data
+    Mark duplicates as ``True`` if enough row equal
+    Except for the first occurrence.    
+    """
+    duplicated = df.duplicated().sum()
+    total_lines = df.shape[0]
+    percentage = (duplicated/total_lines) * 100
+    
+    print("-"*25, "DUPLICATED DATA", "-"*25,)
+    print("\nSHAPE of data: {}".format(df.shape[0]))
+    print("TOTAL duplicated data: {}".format(duplicated))
+    print("PERCENTAGE duplicated data: {} %".format(percentage)) 
+```
+
+```python
+check_quat_duplicated_data(df_callcenter)
+
+# ------------------------- DUPLICATED DATA -------------------------
+
+# SHAPE of data: 41188
+# TOTAL duplicated data: 0
+# PERCENTAGE duplicated data: 0.0 %
+```
+
+<br/>
+
+#### % Duplicated Values
+```python
+# % duplicated values
+
+duplicated = dataframe.duplicated().sum()
+total_cells = np.product(dataframe.shape)
+
+print("In dataset dataframe has {}% of duplicated values.".format((duplicated/total_cells) * 100))
+```
+
+<br/>
+
+#### Create dataframe only duplicated values
+```python
+dataframe[dataframe.duplicated(keep=False)]
+```
+
+#### Create Tag Duplicated Values
+```python
+def calcule_duplicated_values(df_in):
+    """
+    Return dataframe with columns contains duplicated values
+    """
+    # Total
+    duplicated = dataframe.duplicated().sum()
+    print('Total of duplicated values: {}' .format(duplicated))
+
+    # Create column 
+    df_duplicated = df_in[df_in.duplicated(keep=False)]
+    df_in['duplicated_values'] = None    # first create empty column 
+    
+    # Insert new column in df
+    df_in['duplicated_values'] = df_duplicated
+    
+    # Replace None by 0
+    df_in['duplicated_values'] = df_in['duplicated_values'].replace(np.nan, 0, regex=True)    
+
+calcule_duplicated_values(dataframe)
+```
+
+<br/>
+
+---
+
+### Missing Values
+**You cannot simply ignore missing values in your dataset.** You must handle them in some way.
+
+**ASK:** Is a missing data because it was not recorded or because it does not exist?
+<br/>
+To answer this question, it is necessary to analyze the fields without data.
+
+
+#### Check Values Missing
+```python
+# return TRUE if collumn contains values missing
+
+missing = dataframe.isnull().any()
+print(missing)
+
+# account_key          False
+# status               False
+# join_date            False
+# cancel_date           True
+# days_to_cancel        True
+# is_udacity           False
+# is_canceled          False
+# duplicated_values    False
+# dtype: bool
+```
+
+```python
+dataframe.isnull().sum()
+
+# account_key            0
+# status                 0
+# join_date              0
+# cancel_date          652
+# days_to_cancel       652
+# is_udacity             0
+# is_canceled            0
+# duplicated_values      0
+# missing_values         0
+# dtype: int64
+```
+
+```python
+# isnull()
+
+def check_columns_missing_val(df: 'DataFrame'):
+    """
+    Return TRUE, if collumn contains values missing
+    """
+    list_columns_missing = []
+    
+    for index, value in enumerate(df.isnull().any()):
+        if value is True:
+            list_columns_missing.append(df.columns[index])
+    
+    if len(list_columns_missing) > 0:
+        print("Columns's name with missing values:")
+        return list_columns_missing   
+    
+    return "The dataframe NOT contains missing values."
+```
+```python
+# df.isnull().sum().sum()
+
+def check_quat_missing_data(df: 'DataFrame', columns_m_v: list) -> None:
+    """
+    Check if contains missing data
+    Mark missing, if line contains NaN in any column
+    """    
+    missing_values_count = df.isnull().sum()
+    total_missing = missing_values_count.sum()
+    total_lines = df.shape[0]
+    total_cells = np.product(df.shape)
+        
+    percentage_by_line = (total_missing/total_lines) * 100
+    percentage_by_cell = (total_missing/total_cells) * 100
+    
+    # by column
+    quant_missing_by_column = df[columns_m_v].isnull().sum()
+    percentage_missing_by_column = (quant_missing_by_column/total_lines) * 100
+    
+    print("-"*25, "MISSING VALUES", "-"*25)
+    print("\nSHAPE of data: {}".format(df.shape[0]))
+    print("TOTAL missing values: {}".format(total_missing))
+    print("TOTAL missing values by column:\n{}\n".format(quant_missing_by_column))
+    
+    print("PERCENTAGE missing values by cell: {:2.3} %".format(percentage_by_cell))
+    print("PERCENTAGE missing values by row: {:2.3} %".format(percentage_by_line))
+    print("PERCENTAGE missing values by column:\n{}".format(percentage_missing_by_column)) 
+
+# ------------------------- MISSING VALUES -------------------------
+
+# SHAPE of data: 41188
+# TOTAL missing values: 95094
+# TOTAL missing values by column:
+# profissao               330
+# estado_civil             80
+# educacao               1731
+# inadimplente           8597
+# emprestimo_moradia      990
+# emprestimo_pessoal      990
+# mes                   41188
+# dia_da_semana         41188
+# dtype: int64
+
+# PERCENTAGE missing values by cell: 11.0 %
+# PERCENTAGE missing values by row: 2.31e+02 %
+# PERCENTAGE missing values by column:
+# profissao              1
+# estado_civil           0
+# educacao               4
+# inadimplente          21
+# emprestimo_moradia     2
+# emprestimo_pessoal     2
+# mes                  100
+# dia_da_semana        100
+# dtype: float64
+```
+
+#### Create Tag Missing Values
+```python
+def calcule_missing_values(df_in):
+    """
+    Return dataframe with columns contains missing values
+    """
+    # Total
+    total_missing_values = df_in.isnull().sum().sum()
+    print('Total of missing values: {}' .format(total_missing_values))
+    
+    # Columns
+    missing_value_columns = df_in.columns[dataframe.isnull().any()].tolist()
+    print('Columns with missing values: {}' .format(missing_value_columns))
+
+    # Create column 
+    df_null = df_in[df_in.isnull().any(axis=1)]
+    df_in['missing_values'] = None    # first create empty column 
+    
+    # Insert new column in df
+    df_in['missing_values'] = df_null
+    
+    # Replace None by 0
+    df_in['missing_values'] = df_in['missing_values'].replace(np.nan, 0, regex=True)
+    
+    # Convert values in integer
+    df_in['missing_values'] = df_in['missing_values'].astype(str)
+    
+
+calcule_missing_values(dataframe)
+
+# Total of missing values: 1304
+# Columns with missing values: ['cancel_date', 'days_to_cancel']
+```
+
+_Before observation missing values is necessary take decision if **remove** or **keep** missing values._
+
+
+#### Handler Missing Values
+1. Dropping
+2. Replacing by value out of distribuition
+3. Apply mean or mode
+4. Reconstruct values
+5. Label
+
+### Missing categorical data
+- Apply **mode**
+- Label values as `missing`
+- Subistituir por algum valor fora do intervalo de distribuition
+
+### Missing numeric data
+- Apply **mean**
+- The easy way `value = 0`.
+
+### Note
+- xgBoost working with missing values
+
+
+### Dropping `dropna()`
+- Remove rows : `dataframe.dropna()`
+- Remove colluns: `dataframe.dropna(axis=1)`
+
+#### Note
+axis=0 : row
+<br/>
+axis=1 : column
+
+<img src="images/dropna.png" align="center" height=auto width=80%/>
+
+<br/>
+
+### Replacing by value out of distribuition `fillna()`
+
+ - Eg: `-999`, `-1`, ...
+ - **BAD**:  neural networks.
+
+<img src="images/fillna.png" align="center" height=auto width=80%/>
+
+<br/>
+
+### Apply mean or mode `fillna()`
+ - **GOOD**: linear models and neural networks.
+ - **BAD**:  para as tree, pode ser mais difícil selecionar o objeto que tinha missing values, logo de início.
+
+<br/>
+
+#### Reconstruct values
+Replace using an algorithm. the forecasting model is one of the sophisticated methods for dealing with missing data. Here, we create a predictive model to estimate values that will replace missing data. In this case, we divided our data set into two sets: one set with no missing values for the variable and one with missing values. The first data set becomes the model's training data set, while the second data set with missing values is the test data set and the variable with missing values is treated as the target variable.
+   - KNN using the neighbors.
+   - Logistic regression
+
+<br/>
+
+### Label `fillna() `
+ - **GOOD**: trees and neural networks
+ - **BAD**: increase columns numbers.
+
+<img src="images/label_missing_values.png" align="center" height=auto width=80%/>
+
+<br/>
+<br/>
+
+#### Linear Interpolation
+ - Times series
+
+<img src="images/interpolation.png" align="center" height=auto width=80%/>
+
+<br/>
+<br/>
+
+### Fixing Data Types
+- data conversion 
+- It is recommended to treat missing values first
+
+```python
+deals['dealsDateCreated'] = pd.to_datetime(deals['dealsDateCreated'], 
+                                           yearfirst=False)
+
+#Transform string to date
+data['date'] = pd.to_datetime(data.date, format="%d-%m-%Y")
+
+#Extracting Year
+data['year'] = data['date'].dt.year
+
+#Extracting Month
+data['month'] = data['date'].dt.month
+
+#Extracting the weekday name of the date
+data['day_name'] = data['date'].dt.day_name()
+```
+
+```python
+pd.to_numeric(deals['dealsPrice'], 
+              errors='ignore', 
+              downcast='integer')
+
+deals['dealsPrice'].astype(dtype='int32', 
+                           errors='ignore')
+
+deals['dealsId'].astype(str)                        
+```
+
+```python
+def handler_typing(df: 'dataframe', type_col: str, list_cont_feature: list, *columns: list):
+    for column in columns:
+        if column in list_cont_feature:
+            print(column)
+            df[column] = df[column].map('{:,.2f}'.format) \
+                        .astype(float) # object -> float
+            continue
+            
+        df[column] = df[column].astype(dtype=type_col, errors='raise')
+    
+    return df.info(), display(df.head())
+```
+```python
+list_cont_feature = ['indice_precos_consumidor',
+                     'indice_confianca_consumidor',
+                     'euribor3m']
+
+handler_typing(df_callcenter, 'int16', list_cont_feature, *list_columns)
+```
+<br/>
+
+---
+
+
+### Outliers
+```
+Better Data > Fancier Algorithms
+```
+- Check if contains outliers
+- Count outliers
+- Check percentage
+- Plot outliers
+- Handler outliers
+  - drop
+  - mark
+  - rescale
+- In general, if you have a **legitimate** reason to remove an outlier, it will help your model’s performance.
+- However, outliers are innocent until proven guilty. **You should never remove an outlier just because it’s a "big number." **
+
+```python
+# quantile()
+
+dict_quantile = {}
+
+def calculate_quantile_by_col(df: 'dataframe', *columns: list) -> None:
+    """
+    Calculate boxplot
+    """
+    for column in columns:
+        dict_col = {}
+       
+        q1 = df[column].quantile(0.25)
+        q3 = df[column].quantile(0.75)
+        iqr = q3 - q1  # Interquartile range
+
+        dict_col[column] = {'q1': q1,
+                            'q3': q3,
+                            'iqr': iqr}
+        # add dict column in principal dict
+        dict_quantile.update(dict_col)
+```
+```python
+def calculate_fence(dict_col: 'dataframe', *columns: list) -> None:
+    for column in columns:
+        dict_actual_col = dict_col[column]  # mount internal dict of dict_quantile
+        dict_fence = {}  # auxiliar dict
+        
+        fence_low  = dict_actual_col['q1'] - 1.5 * dict_actual_col['iqr']
+        fence_high = dict_actual_col['q3'] + 1.5 * dict_actual_col['iqr']
+        
+        dict_fence = {'fence_low': fence_low,
+                     'fence_high': fence_high}
+        
+        # add dict column in principal dict
+        dict_col[column].update(dict_fence)
+```
+```python
+def count_outlier(df: 'dataframe', dict_quantile: dict, *columns: list):
+    for column in columns:
+        # mount internal dict of dict_quantile
+        dict_actual_col = dict_quantile[column]
+
+        outlier_less_q1 = (df[column] < dict_actual_col['fence_low']).sum()  # numpy.int64
+        outlier_more_q3 = (df[column] > dict_actual_col['fence_high']).sum()  # numpy.int64
+        total = outlier_less_q1 + outlier_more_q3
+        
+        dict_outlier = {'outlier_less_q1': outlier_less_q1,
+                        'outlier_more_q3': outlier_more_q3,
+                        'outlier_total': total}
+        
+        # add dict column in principal dict
+        dict_quantile[column].update(dict_outlier)
+        
+    print("-"*25, "Dict Quantilie", "-"*25, end='\n\n')
+    return pp.pprint(dict_quantile)
+```
+
+```python
+def check_percentage_outlier(df: 'dataframe', dict_quantile: dict, *columns: list):
+    outlier_total = 0
+    total_lines = df.shape[0]
+    total_cells = np.product(df.shape)
+    
+    print("-"*15, "OUTLIERS", "-"*15)
+    print("\nSHAPE of data: {}".format(df.shape[0]))
+    print("\nPERCENTAGE outlier by column:") 
+    
+    # by column
+    for column in columns:
+        dict_actual_col = dict_quantile[column]  # mount internal dict of dict_quantile
+        outlier_total += dict_actual_col['outlier_total']
+
+        quant_outlier_by_col = dict_actual_col['outlier_total']
+        percentage_outlier_by_col = (quant_outlier_by_col/total_lines) * 100
+        
+        print("{}: {:4.4} %".format(column, percentage_outlier_by_col)) 
+
+        
+    percentage_by_line = (outlier_total/total_lines) * 100
+    percentage_by_cell = (outlier_total/total_cells) * 100
+        
+    print("PERCENTAGE outlier by line: {:2.3} %".format(percentage_by_line))
+    print("PERCENTAGE outlier by cell: {:2.3} %".format(percentage_by_cell))
+    print("\nTOTAL outlier: {}".format(outlier_total))
+```
+
+```python
+# run
+calculate_quantile_by_col(df_callcenter_cleasing, *list_columns)
+calculate_fence(dict_quantile, *list_columns)
+count_outlier(df_callcenter_cleasing, dict_quantile, *list_columns)
+
+# ------------------------- Dict Quantilie -------------------------
+
+# {   'campanha_anterior': {   'fence_high': 0.0,
+#                              'fence_low': 0.0,
+#                              'iqr': 0.0,
+#                              'outlier_less_q1': 0,
+#                              'outlier_more_q3': 5625,
+#                              'outlier_total': 5625,
+#                              'q1': 0.0,
+#                              'q3': 0.0},
+#     'dia_da_semana': {   'fence_high': 7.0,
+#                          'fence_low': -1.0,
+#                          'iqr': 2.0,
+#                          'outlier_less_q1': 0,
+#                          'outlier_more_q3': 0,
+#                          'outlier_total': 0,
+#                          'q1': 2.0,
+#                          'q3': 4.0},
+#     'dias_ultimo_contato': {   'fence_high': 0.0,
+#                                'fence_low': 0.0,
+#                                'iqr': 0.0,
+#                                'outlier_less_q1': 0,
+#                                'outlier_more_q3': 1500,
+#                                'outlier_total': 1500,
+#                                'q1': 0.0,
+#                                'q3': 0.0},
+#     'duracao': {   'fence_high': 6.5,
+#                    'fence_low': 2.5,
+#                    'iqr': 1.0,
+#                    'outlier_less_q1': 1020,
+#                    'outlier_more_q3': 714,
+#                    'outlier_total': 1734,
+#                    'q1': 4.0,
+#                    'q3': 5.0},
+#     'educacao': {   'fence_high': 11.0,
+#                     'fence_low': -5.0,
+#                     'iqr': 4.0,
+#                     'outlier_less_q1': 0,
+#                     'outlier_more_q3': 0,
+#                     'outlier_total': 0,
+#                     'q1': 1.0,
+#                     'q3': 5.0},
+#     'emprestimo_moradia': {   'fence_high': 2.5,
+#                               'fence_low': -1.5,
+#                               'iqr': 1.0,
+#                               'outlier_less_q1': 0,
+#                               'outlier_more_q3': 0,
+#                               'outlier_total': 0,
+#                               'q1': 0.0,
+#                               'q3': 1.0},
+#     'emprestimo_pessoal': {   'fence_high': 0.0,
+#                               'fence_low': 0.0,
+#                               'iqr': 0.0,
+#                               'outlier_less_q1': 0,
+#                               'outlier_more_q3': 6248,
+#                               'outlier_total': 6248,
+#                               'q1': 0.0,
+#                               'q3': 0.0},
+#     'estado_civil': {   'fence_high': 2.5,
+#                         'fence_low': -1.5,
+#                         'iqr': 1.0,
+#                         'outlier_less_q1': 0,
+#                         'outlier_more_q3': 0,
+#                         'outlier_total': 0,
+#                         'q1': 0.0,
+#                         'q3': 1.0},
+#     'euribor3m': {   'fence_high': 10.39,
+#                      'fence_low': -4.09,
+#                      'iqr': 3.62,
+#                      'outlier_less_q1': 0,
+#                      'outlier_more_q3': 0,
+#                      'outlier_total': 0,
+#                      'q1': 1.34,
+#                      'q3': 4.96},
+#     'idade': {   'fence_high': 69.5,
+#                  'fence_low': 9.5,
+#                  'iqr': 15.0,
+#                  'outlier_less_q1': 0,
+#                  'outlier_more_q3': 468,
+#                  'outlier_total': 468,
+#                  'q1': 32.0,
+#                  'q3': 47.0},
+#     'inadimplente': {   'fence_high': 0.0,
+#                         'fence_low': 0.0,
+#                         'iqr': 0.0,
+#                         'outlier_less_q1': 0,
+#                         'outlier_more_q3': 3,
+#                         'outlier_total': 3,
+#                         'q1': 0.0,
+#                         'q3': 0.0},
+#     'indice_confianca_consumidor': {   'fence_high': -26.949999999999992,
+#                                        'fence_low': -52.150000000000006,
+#                                        'iqr': 6.300000000000004,
+#                                        'outlier_less_q1': 0,
+#                                        'outlier_more_q3': 446,
+#                                        'outlier_total': 446,
+#                                        'q1': -42.7,
+#                                        'q3': -36.4},
+#     'indice_precos_consumidor': {   'fence_high': 95.35499999999999,
+#                                     'fence_low': 91.715,
+#                                     'iqr': 0.9099999999999966,
+#                                     'outlier_less_q1': 0,
+#                                     'outlier_more_q3': 0,
+#                                     'outlier_total': 0,
+#                                     'q1': 93.08,
+#                                     'q3': 93.99},
+#     'meio_contato': {   'fence_high': 2.5,
+#                         'fence_low': -1.5,
+#                         'iqr': 1.0,
+#                         'outlier_less_q1': 0,
+#                         'outlier_more_q3': 0,
+#                         'outlier_total': 0,
+#                         'q1': 0.0,
+#                         'q3': 1.0},
+#     'mes': {   'fence_high': 12.5,
+#                'fence_low': 0.5,
+#                'iqr': 3.0,
+#                'outlier_less_q1': 0,
+#                'outlier_more_q3': 0,
+#                'outlier_total': 0,
+#                'q1': 5.0,
+#                'q3': 8.0},
+#     'numero_empregados': {   'fence_high': 5421.5,
+#                              'fence_low': 4905.5,
+#                              'iqr': 129.0,
+#                              'outlier_less_q1': 0,
+#                              'outlier_more_q3': 0,
+#                              'outlier_total': 0,
+#                              'q1': 5099.0,
+#                              'q3': 5228.0},
+#     'profissao': {   'fence_high': 7.0,
+#                      'fence_low': -1.0,
+#                      'iqr': 2.0,
+#                      'outlier_less_q1': 0,
+#                      'outlier_more_q3': 3752,
+#                      'outlier_total': 3752,
+#                      'q1': 2.0,
+#                      'q3': 4.0},
+#     'qtd_contatos_campanha': {   'fence_high': 2.5,
+#                                  'fence_low': -1.5,
+#                                  'iqr': 1.0,
+#                                  'outlier_less_q1': 0,
+#                                  'outlier_more_q3': 157,
+#                                  'outlier_total': 157,
+#                                  'q1': 0.0,
+#                                  'q3': 1.0},
+#     'qtd_contatos_total': {   'fence_high': 0.0,
+#                               'fence_low': 0.0,
+#                               'iqr': 0.0,
+#                               'outlier_less_q1': 0,
+#                               'outlier_more_q3': 5625,
+#                               'outlier_total': 5625,
+#                               'q1': 0.0,
+#                               'q3': 0.0},
+#     'resultado': {   'fence_high': 0.0,
+#                      'fence_low': 0.0,
+#                      'iqr': 0.0,
+#                      'outlier_less_q1': 0,
+#                      'outlier_more_q3': 4639,
+#                      'outlier_total': 4639,
+#                      'q1': 0.0,
+#                      'q3': 0.0}}
+```
+
+```python
+check_percentage_outlier(df_callcenter_cleasing, dict_quantile, *list_columns)
+
+# --------------- OUTLIERS ---------------
+
+# SHAPE of data: 41170
+
+# PERCENTAGE outlier by column:
+# idade: 1.137 %
+# profissao: 9.113 %
+# estado_civil:  0.0 %
+# educacao:  0.0 %
+# inadimplente: 0.007287 %
+# emprestimo_moradia:  0.0 %
+# emprestimo_pessoal: 15.18 %
+# meio_contato:  0.0 %
+# mes:  0.0 %
+# dia_da_semana:  0.0 %
+# duracao: 4.212 %
+# qtd_contatos_campanha: 0.3813 %
+# dias_ultimo_contato: 3.643 %
+# qtd_contatos_total: 13.66 %
+# campanha_anterior: 13.66 %
+# indice_precos_consumidor:  0.0 %
+# indice_confianca_consumidor: 1.083 %
+# euribor3m:  0.0 %
+# numero_empregados:  0.0 %
+# resultado: 11.27 %
+# PERCENTAGE outlier by line: 73.3 %
+# PERCENTAGE outlier by cell: 3.67 %
+
+# TOTAL outlier: 30197
+```
+
+#### Plot Outliers
+Undertanding box-plot
+
+<img src="images/interquartile.png" align="center" height=auto width=80%/>
+
+<br/>
+
+<img src="images/outliers.png" align="center" height=auto width=80%/>
+
+<br/>
+
+<img src="images/quartis.png" align="center" height=auto width=80%/>
+
+```python
+import seaborn as sns
+sns.boxplot(x=df_callcenter['duracao'],
+            width=0.5)
+```
+
+```python
+def plot_box_plot(df: 'dataframe', data_set_name: str, xlim=None):
+    """
+    Creates a seaborn boxplot including all dependent
+    
+    Args:
+    data_set_name: Name of title for the boxplot
+    xlim: Set upper and lower x-limits
+    
+    Returns:
+    Box plot with specified data_frame, title, and x-limits 
+    """
+    fig, ax = plt.subplots(figsize=(18, 10))
+
+    if xlim is not None:
+        plt.xlim(*xlim)
+    
+    plt.title(f"Horizontal Boxplot {data_set_name}")
+        
+    plt.ylabel('Dependent Variables')
+    plt.xlabel('Measurement x')
+    ax = sns.boxplot(data = df,
+                    orient = 'h', 
+                    palette = 'Set2',
+                    notch = False, # box instead of notch shape 
+                    sym = 'rs')  # red squares for outliers
+
+    plt.show()
+```
+
+```python
+plot_box_plot(df_callcenter_cleasing, 
+              'Box Plot', 
+              (-60, 60))
+```
+<img src="images/box_plot_example.png" align="center" height=auto width=80%/>
+
+<br/>
+
+```python
+def show_boxplot(df, *columns):
+    for column in columns:
+        plt.figure (figsize = (17, 1)) 
+        sns.boxplot(x=df[column],
+                    width=0.3,
+                    linewidth=1.0,
+                    showfliers=True)
+
+show_boxplot(df_callcenter_cleasing, *list_columns)
+```
+
+#### Boxplot on a Normal Distribution
+The graph Normal ditribuition help understand a boxplot.
+
+<img src="images/normal_boxplot.png" align="center" height=auto width=80%/>
+
+<br/>
+<br/>
+
+#### Remove Outliers
+- Drop
+- Mark
+- Median
+- Rescale 
+
+<img src="images/Outlier_print.png" align="center" height=auto width=80%/>
+
+### Drop
+
+1. Select conditional
+  - `query()` process using `loc[]` and `eval()` 
+  - `loc()`
+
+2. Drop row
+  - `drop(axis=1)`
+
+
+#### Select conditional
+```python
+# query()
+# &, |, in, !
+
+df_result_query = df_callcenter.query('duracao == 0 & idade > 50',
+                                       inplace=False)
+
+# loc()
+cond = df_callcenter['duracao'] == 0
+cond2 = df_callcenter['idade'] > 50
+
+df_result_loc = df_callcenter.loc[cond & cond2]
+```
+
+#### Drop Row
+```python
+df_callcenter = df_callcenter.drop(df_result_query, axis=1)
+```
+
+<br/>
+
+#### Mark
+Create feature `['outliers']` where:
+- 0 is not outlier
+- 1 is outlier
+
+```python
+# where()
+
+# Create feature based on boolean condition
+cond = df_callcenter['duracao'] < 600
+
+# Create feature 
+df_callcenter['outlier'] = np.where(cond, 0, 1)
+
+# Show data
+df_callcenter.head()
+```
+
+<br/>
 
 ---
 
