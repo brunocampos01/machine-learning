@@ -3,7 +3,7 @@
 - [Pattern Name of notebook](#pattern-name-of-notebook)
 - [Import Declaration](#import-declaration)
 - [Prepare Principal Directory](#prepare-principal-directory)
-- [Graphics Format](#graphics-format)
+- [Graphics Format](#graphics-format) :bar_chart: :chart_with_upwards_trend:
   - [Cell Format](#cell-format)
   - [Matplotlib](#matplotlib)
   - [Seaborn](#seaborn)
@@ -134,8 +134,8 @@ warnings.filterwarnings('ignore')
 pp = pprint.PrettyPrinter(indent=4)
 ```
 
-### :bar_chart: :chart_with_upwards_trend: Graphics Format
-It is recommended to use a resource file, such as [this](#src/visualization/plot_config.ini). This ensures better standardization of notebooks.
+### Graphics Format
+It is recommended to use a resource file, such as [this](src/visualization/plot_config.ini). This ensures better standardization of notebooks.
 ```python
 config = configparser.ConfigParser()
 config.read('src/visualization/plot_config.ini')
