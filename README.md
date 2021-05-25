@@ -9,13 +9,18 @@
 - [Data Undertanding](#data-undertanding)
   - [Collect Initial Data](#collect-initial-data)
   - [Describe Data](#describe-data)
-    - [Ways to Explore Data](#Ways to Explore Data)
-      - [Summary Statistics](#Summary Statistics)
-      - [Visualization](#Visualization)
-
-  - [Irrelevant Data](#irrelevant-data)
-  - [Split Features](#split-features)
-  - [Exploratory Analysis](#exploratory-analysis)
+    - [Ways to Explore Data](#ways-to-explore-data)
+      - [Exploratory Analysis: Statistic](#exploratory-analysis:-statistic)
+        - [Measures Central Trend](#measures-central-trend)
+        - [Measures Location](#Measures Location)
+        - [Measure of Shape](#Measure of Shape)
+        - [Measure of Skewness](#Measure of Skewness)
+        - [Measures of spread](#Measures of spread)
+        - [Measure of Dependence](#Measure of Dependence)
+        - [Sample Size](#Sample Size)
+      - [Exploratory Analysis: Visualization](#visualization)
+    - [Irrelevant Data](#irrelevant-data)
+    - [Split Features](#split-features)
 <!-- - [Data Preparation](#Data Preparation)
   - [Name Adaption of Features](#Name Adaption of Features)
   - [Strip and Lower](#Strip and Lower)
@@ -81,6 +86,15 @@ Winners of data science competitions do their modeling always thinking about whi
 ---
 
 ## Data Understanding
+- First read metadata
+- View firsts lines
+- View Shape
+- Information About Column
+  - column's name
+  - row by column
+  - type by column
+  - type dataframe
+  - size dataframe
 
 ### Collect Initial Data
 Most companies have an enormous amount of data, so it is essential to decide what types of data are needed for the project. Next, you need to determine where they are stored and how to gain access to the data. Depending on where your company stores the data, it’s up to data engineers to get the data from the company’s data source, clear the data and hand it over to the data scientist.
@@ -96,6 +110,8 @@ df = pd.read_csv('data/raw/deals.tsv',
 
 # CPU times: user 8.44 ms, sys: 14 µs, total: 8.45 ms
 ```
+
+<br/>
 
 - Save
 ```python
@@ -113,10 +129,10 @@ def save_data(df: 'dataframe' = None,
 # CPU times: user 8.44 ms, sys: 14 µs, total: 8.45 ms
 ```
 
+<br/>
 
 ### Describe Data
 First, you'll want to answer a set of basic questions about the dataset:
-
 - How many observations do I have?
 - How many features?
 - What are the data types of my features? Are they numeric? Categorical?
@@ -153,74 +169,10 @@ df.info()
 ```
 
 #### Ways to Explore Data
-- Summary Statistics
+- Exploratory Analysis: Statistic
 - Visualization
 
 <img src="images/way_to_explore.png" align="center" height=auto width=80%/>
-
-<br/>
-
-### Irrelevant Data
-Irrelevant observations are those that **don’t actually fit the specific problem** that you’re trying to solve.
-<br/>
-The first step to data cleaning is removing unwanted observations from your dataset.
-<br/>
-tip: in SQL every use `select distict`
-
-
-<img src="images/irrelevant_data.png" align="center" height=auto width=50%/>
-
-<br/>
-
-#### Code
-```python
-# unique()
-
-def show_categorical_values(df: 'DataFrame', *columns: list) -> None:
-    for column in columns:
-        list_unique = df[column].unique()
-        print(f"The categorical column {column} contains this values:\n\n{list_unique}")
-```
-
-<br/>
-
-### Split Features
-- Numerical cols
-- Categorical cols
-- All cols
-
-```python
-# Lists that will be manipulated in the data processing
-list_columns = []
-list_categorical_col = []
-list_numerical_col = []
-
-
-def get_col(df: 'dataframe', type_descr: 'numpy') -> list:
-    """
-    Function get list columns 
-    
-    Args:
-    type_descr
-        np.number, np.object -> return list with all columns
-        np.number            -> return list numerical columns 
-        np.object            -> return list object columns
-    """
-    try:
-        col = (df.describe(include=type_descr).columns)  # pandas.core.indexes.base.Index  
-    except ValueError:
-        print(f'Dataframe not contains {type_descr} columns !', end='\n')    
-    else:
-        return col.tolist() 
-
-
-list_numerical_col = get_col(df=df_callcenter,
-                             type_descr=np.number)
-list_categorical_col = get_col(df=df_callcenter,
-                               type_descr=np.object)
-list_columns = get_col(df=df_callcenter,
-                       type_descr=[np.object, np.number])
-```
 
 <br/>
 
@@ -233,41 +185,20 @@ list_columns = get_col(df=df_callcenter,
 <br/>
 
 ### Measures Central Trend 
-
 - Mean: 
-    - Necessay to get **standard deviation and variance**
-    - More precise when distribuition follow Skewness
-    
-  - Meadian: 
-    - Know center
-    - More precise when distribuition not Skewness
-    
-  - Mode: 
-    - Know trend
-    
-  - Skewness
-    - Simetric distribution
+ - Necessay to get **standard deviation and variance**
+ - More precise when distribuition follow Skewness
+- Meadian: 
+ - Know center
+ - More precise when distribuition not Skewness
+- Mode: 
+ - Know trend  
+- Skewness
+ - Simetric distribution
 
 <img src="images/mean_mode_median.png" align="center" height=auto width=70%/>
 
-## Understand Data
-- First read metadata
-- View firsts lines
-- View Shape
-- Information About Column
-  - column's name
-  - row by column
-  - type by column
-  - type dataframe
-  - size dataframe
-
-```python
-list_columns = (df_callcenter.columns).tolist()
-
-print("-"*25, "List Columns", "-"*25, end='\n')
-display(list_columns)
-```
-
+<br/>
 
 #### Measures Location
 ```python
@@ -505,6 +436,78 @@ from scipy.stats import spearmanr
 corr, p = spearmanr(data1, data2)
 print('Spearman correlation: %.3f' % corr)
 ```
+
+
+
+
+
+
+
+
+### Irrelevant Data
+Irrelevant observations are those that **don’t actually fit the specific problem** that you’re trying to solve.
+<br/>
+The first step to data cleaning is removing unwanted observations from your dataset.
+<br/>
+tip: in SQL every use `select distict`
+
+
+<img src="images/irrelevant_data.png" align="center" height=auto width=50%/>
+
+<br/>
+
+#### Code
+```python
+# unique()
+
+def show_categorical_values(df: 'DataFrame', *columns: list) -> None:
+    for column in columns:
+        list_unique = df[column].unique()
+        print(f"The categorical column {column} contains this values:\n\n{list_unique}")
+```
+
+<br/>
+
+### Split Features
+- Numerical cols
+- Categorical cols
+- All cols
+
+```python
+# Lists that will be manipulated in the data processing
+list_columns = []
+list_categorical_col = []
+list_numerical_col = []
+
+
+def get_col(df: 'dataframe', type_descr: 'numpy') -> list:
+    """
+    Function get list columns 
+    
+    Args:
+    type_descr
+        np.number, np.object -> return list with all columns
+        np.number            -> return list numerical columns 
+        np.object            -> return list object columns
+    """
+    try:
+        col = (df.describe(include=type_descr).columns)  # pandas.core.indexes.base.Index  
+    except ValueError:
+        print(f'Dataframe not contains {type_descr} columns !', end='\n')    
+    else:
+        return col.tolist() 
+
+
+list_numerical_col = get_col(df=df_callcenter,
+                             type_descr=np.number)
+list_categorical_col = get_col(df=df_callcenter,
+                               type_descr=np.object)
+list_columns = get_col(df=df_callcenter,
+                       type_descr=[np.object, np.number])
+```
+
+<br/>
+
 
 ## Sample Size
 - Too large samples are a waste of time and money, too small are inaccurate.
