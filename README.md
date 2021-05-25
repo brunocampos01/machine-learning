@@ -58,10 +58,8 @@
 Winners of data science competitions do their modeling always thinking about which model they will use. For example:
 - tree-based models
 - linear models
- -->
 
 ## CRISP-DM
-
 
 <img src="images/crips_dm.png" align="center" height=auto width=100%/>
 
@@ -69,12 +67,12 @@ Winners of data science competitions do their modeling always thinking about whi
 <br/>
 
 ### Business Undertanding
+- [CRISP-DM on AWS](https://gist.github.com/bluekidds/cad5c0ea2e5051b638ec39810f3c4b09)
+- [The business understanding stage of the Team Data Science Process lifecycle](https://docs.microsoft.com/pt-br/azure/machine-learning/team-data-science-process/lifecycle-business-understanding)
 
 <img src="images/business_under.png" align="center" height=auto width=80%/>
 
-- [The business understanding stage of the Team Data Science Process lifecycle](https://docs.microsoft.com/pt-br/azure/machine-learning/team-data-science-process/lifecycle-business-understanding)
-- [CRISP-DM on AWS](https://gist.github.com/bluekidds/cad5c0ea2e5051b638ec39810f3c4b09)
-
+<br/>
 
 ## Data Understanding
 
@@ -86,11 +84,39 @@ First, you'll want to answer a set of basic questions about the dataset:
 - What are the data types of my features? Are they numeric? Categorical?
 - Do I have a target variable?
 
-<img src="images/organic.png" align="center" height=auto width=80%/>
+<img src="images/organic.png" align="center" height=auto width=70%/>
 
 <br/>
 
-#### Ways to Explore Data
+#### Code
+```python
+print("Dataframe:\n{} rows\n{} columns".format(df.shape[0], df.shape[1]))
+
+# Dataframe:
+# 45222 rows
+# 14 columns
+```
+
+```python
+df.head()
+```
+
+```python
+df.info()
+
+# <class 'pandas.core.frame.DataFrame'>
+# RangeIndex: 595212 entries, 0 to 595211
+# Data columns (total 59 columns):
+# id                595212 non-null int64
+# target            595212 non-null int64
+# ps_ind_01         595212 non-null int64
+# ps_ind_02_cat     594996 non-null float64
+# ...
+```
+
+### Ways to Explore Data
+- Summary Statistics
+- Visualization
 
 <img src="images/way_to_explore.png" align="center" height=auto width=80%/>
 
@@ -127,6 +153,7 @@ def save_data(df: 'dataframe' = None,
 # CPU times: user 8.44 ms, sys: 14 µs, total: 8.45 ms
 ```
 
+<br/>
 
 ### Irrelevant Data
 Irrelevant observations are those that **don’t actually fit the specific problem** that you’re trying to solve.
@@ -136,11 +163,11 @@ The first step to data cleaning is removing unwanted observations from your data
 tip: in SQL every use `select distict`
 
 
-<img src="images/irrelevant_data.png" align="center" height=auto width=70%/>
+<img src="images/irrelevant_data.png" align="center" height=auto width=50%/>
 
 <br/>
 
-
+#### Code
 ```python
 # unique()
 
@@ -150,7 +177,9 @@ def show_categorical_values(df: 'DataFrame', *columns: list) -> None:
         print(f"The categorical column {column} contains this values:\n\n{list_unique}")
 ```
 
-#### Split Features
+<br/>
+
+### Split Features
 - Numerical cols
 - Categorical cols
 - All cols
@@ -190,8 +219,8 @@ list_columns = get_col(df=df_callcenter,
 
 <br/>
 
-## Exploratory Analysis: Statistic
-"**_Get to know the dataset_**"
+### Exploratory Analysis: Statistic
+"_Get to know the dataset_"
 
 <img src="images/undestand_data.png" align="center" height=auto width=70%/>
 
