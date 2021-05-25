@@ -184,23 +184,21 @@ df.info()
 <br/>
 <br/>
 
-### Measures Central Trend 
-- Mean: 
- - Necessay to get **standard deviation and variance**
- - More precise when distribuition follow Skewness
-- Meadian: 
- - Know center
- - More precise when distribuition not Skewness
-- Mode: 
- - Know trend  
-- Skewness
- - Simetric distribution
+#### Measures Central Trend 
+- **Mean**: 
+  - Necessay to get **standard deviation and variance**
+  - More precise when distribuition follow Skewness
+- **Meadian**: 
+  - Know center
+  - More precise when distribuition not Skewness
+- **Mode**: 
+  - Know trend  
+- **Skewness**:
+   - Simetric distribution
 
 <img src="images/mean_mode_median.png" align="center" height=auto width=70%/>
 
-<br/>
-
-#### Measures Location
+##### Code
 ```python
 def show_measures_location(df: 'dataframe', type_descr: 'list') -> 'dataframe':
     """
@@ -237,17 +235,18 @@ show_measures_location(df=df,
 ```
 
 #### Measure of Shape
-Medidas de forma descrevem a forma da distribuição de um conjunto de valores. 
+Shape measures describe the shape of the distribution of a set of values.
 - Skew
 - kurtosis
 
 #### Skewness
-"Assimetria dos dados."
+"_Asymmetry of data_"
 
-Quanto mais próximo estiver de 0, melhor (normal distribuition). A assimetria basicamente significa que os dados de saída estão concentrados em uma extremidade do intervalo. Nós gostamos que nossos dados sejam o mais central possível.
+The closer it is to 0, the better (normal distribution). Asymmetry basically means that the output data is concentrated at one end of the range. We like our data to be as central as possible.
 
 <img src="images/skews.png" align="center" height=auto width=70%/>
 
+##### Code
 ```python
 df.skew()
 
@@ -266,6 +265,7 @@ kurtosis to measure how heavy its tails are compared to a normal distribution
 
 <img src="images/kurtosis.png" align="center" height=auto width=80%/>
 
+##### Code
 ```python
 from scipy.stats import kurtosis
 from scipy.stats import skew
@@ -285,9 +285,8 @@ print("kurt = ",kurtosis(data))
 # kurt =  0.00018034838623570693
 ```
 
-```
-#  At this point I decided to use dataframe to maintain the same function pattern df.describe()
-# However, dictionnaires are more recommended because they are faster in a few data.
+```python
+# Dictionnaires are more recommended because they are faster in a few data.
 
 def show_measures_shape(df: 'dataframe', *columns: 'list') -> 'dataframe':
     index = ['skew', 'kurtosis'] 
@@ -315,8 +314,9 @@ show_measures_shape(df_callcenter, *list_numerical_col)
 - Maximum
 - Minimum
 - Range
-- maximum - minimum
+- maximum and minimum
 
+##### Code
 ```python
 def show_measures_spread(df: 'dataframe', *columns: 'list') -> 'dataframe':
     index = ['std_deviation_pop',
@@ -349,9 +349,8 @@ def show_measures_spread(df: 'dataframe', *columns: 'list') -> 'dataframe':
 show_measures_spread(df_callcenter, *list_numerical_col)
 ```
 
-
 #### Covariance
-Measures the relationship between 2 or more variables
+Measures the relationship between 2 or more variables.
 
 How interpreter?
 <br/>
@@ -360,18 +359,19 @@ How interpreter?
 - A covariance value of zero indicates that both variables are completely independent.
 
 
-
+##### Code
 ```python
 # calculate the covariance between two variables
 from numpy.random import randn
 from numpy.random import seed
 from numpy import cov
+
+
 # seed random number generator
 seed(1)
 # prepare data
 data1 = 20 * randn(1000) + 100
 data2 = data1 + (10 * randn(1000) + 50)
-
 
 # calculate covariance matrix
 covariance = cov(data1, data2)
@@ -383,8 +383,8 @@ print(covariance)
 The covariance between the two variables is 389.75. We can see that this is positive, suggesting that the variables change in the same direction as we expect.
 
 
-### Measure of Dependence
-"Describe relationship between variables."
+#### Measure of Dependence
+"_Describe relationship between variables_"
 
 - Correlation is a value between -1 and 1
 - Correlations near -1 or 1 indicate a strong relationship.
@@ -392,16 +392,14 @@ The covariance between the two variables is 389.75. We can see that this is posi
 - Aqueles mais próximos de 0 indicate a weak relationship.
 
 #### Goal get with anasylis correlations
-
 - Which features are strongly correlated with the **target variable**?
 - Are there interesting or unexpected strong correlations between other features?
-
 
 Types:
 - Correlation Pearson
 - Correlation Spearman
 
-
+##### Code
 ```python
 df.corr()
 ```
@@ -409,10 +407,12 @@ df.corr()
 #### Pearson
 Tests whether two samples have a **linear relationship.**
 
+##### Code
 ```python
 from numpy.random import seed
 from numpy.random import randn
 from scipy.stats import pearsonr
+
 
 # seed random number generator
 seed(1)
@@ -431,6 +431,7 @@ Tests whether two samples have a **monotonic relationship.**
    - The observations in each sample are independent and identically distributed (iid).
    - The observations in each sample can be classified.
 
+##### Code
 ```python
 from scipy.stats import spearmanr
 corr, p = spearmanr(data1, data2)
