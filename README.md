@@ -12,29 +12,28 @@
     - [Ways to Explore Data](#ways-to-explore-data)
       - [Exploratory Analysis: Statistic](#exploratory-analysis:-statistic)
         - [Measures Central Trend](#measures-central-trend)
-        - [Measures Location](#measures-location)
         - [Measure of Shape](#measure-of-shape)
-        - [Measure of Skewness](#measure-of-skewness)
         - [Measures of spread](#measures-of-spread)
         - [Measure of Dependence](#measure-of-dependence)
-        - [Sample Size](#sample-size)
       - [Exploratory Analysis: Visualization](#visualization)
     - [Irrelevant Data](#irrelevant-data)
     - [Split Features](#split-features)
-<!-- - [Data Preparation](#Data Preparation)
+    - [Map Columns Values](#map-columns-values)
+    - [Sample Size](#sample-size)
+    - [Statistical Hypothesis Tests](#statistical-hypothesis-tests)
+- [Data Preparation](#Data Preparation)
   - [Name Adaption of Features](#Name Adaption of Features)
   - [Strip and Lower](#Strip and Lower)
   - [Set Index](#Set Index)
   - [Feature Selection](#Feature Selection)
   - [One-hot-encoding](#One-hot-encoding)
-  - [Map Columns Values](#Map Columns Values)
   - [Duplicate Records](#Duplicate Records)
   - [Missing Values](#Missing Values)
   - [Fixing Data Types](#Fixing Data Types)
   - [Outliers](#Outliers)
   - [Feature Engineering](#Feature Engineering)
   - [Feature Selection](#Feature Selection)
-- [Modeling](#)
+<!-- - [Modeling](#)
 - [Evaluation](#)
 - [Deployment](#)
 
@@ -48,8 +47,8 @@
 
 ## Deep Learning
 - [Perceptros](#perceptros)
-- [Neural Networks](#neural-networks)
- -->
+- [Neural Networks](#neural-networks) -->
+
 <br/>
 
 ---
@@ -235,12 +234,11 @@ show_measures_location(df=df,
 ```
 
 #### Measure of Shape
+"_Asymmetry of data_"
+
 Shape measures describe the shape of the distribution of a set of values.
 - Skew
 - kurtosis
-
-#### Skewness
-"_Asymmetry of data_"
 
 The closer it is to 0, the better (normal distribution). Asymmetry basically means that the output data is concentrated at one end of the range. We like our data to be as central as possible.
 
@@ -438,12 +436,7 @@ corr, p = spearmanr(data1, data2)
 print('Spearman correlation: %.3f' % corr)
 ```
 
-
-
-
-
-
-
+<br/>
 
 ### Irrelevant Data
 Irrelevant observations are those that **don’t actually fit the specific problem** that you’re trying to solve.
@@ -452,10 +445,8 @@ The first step to data cleaning is removing unwanted observations from your data
 <br/>
 tip: in SQL every use `select distict`
 
-
 <img src="images/irrelevant_data.png" align="center" height=auto width=50%/>
 
-<br/>
 
 #### Code
 ```python
@@ -507,8 +498,78 @@ list_columns = get_col(df=df_callcenter,
                        type_descr=[np.object, np.number])
 ```
 
-<br/>
 
+#### Map Columns Values
+```python
+# I used the dictionary because they are more efficient in these cases
+# https://stackoverflow.com/questions/22084338/pandas-dataframe-performance
+
+def generate_dict_by_col(df: 'dataframe', *columns: list) -> dict:
+    """
+    :return:
+        Return a dict with label of each column 
+    """
+    dict_unique = {}
+    
+    for column in columns:
+        list_unique = df[column].unique().tolist()
+        dict_column = {}
+    
+        for element in list_unique:
+            if isinstance(element, float) is True:  # type nan is float
+                continue
+            dict_column[element] = int(list_unique.index(element))
+        # add dict column in principal dict 
+        dict_unique[column] = dict_column          
+    
+    print("-"*25, "Dictionary with Values Map by Column", "-"*25, end='\n\n')
+    return dict_unique
+```
+
+```python
+dict_cat_unique = generate_number_by_col(df_callcenter, 
+                                         *list_categorical_col)
+
+pp.pprint(dict_cat_unique)
+# -------------- Dictionary with Values Map by Column ------------
+
+# {   'campanha_anterior': {'fracasso': 1, 'nao_existente': 0, 'sucesso': 2},
+#     'dia_da_semana': {'qua': 2, 'qui': 3, 'seg': 0, 'sex': 4, 'ter': 1},
+#     'educacao': {   'analfabeto': 7,
+#                     'curso_tecnico': 4,
+#                     'ensino_medio': 1,
+#                     'fundamental_4a': 0,
+#                     'fundamental_6a': 2,
+#                     'fundamental_9a': 3,
+#                     'graduacao_completa': 6},
+#     'emprestimo_moradia': {'nao': 0, 'sim': 1},
+#     'emprestimo_pessoal': {'nao': 0, 'sim': 1},
+#     'estado_civil': {'casado': 0, 'divorciado': 2, 'solteiro': 1},
+#     'inadimplente': {'nao': 0, 'sim': 2},
+#     'meio_contato': {'celular': 1, 'telefone': 0},
+#     'mes': {   'abr': 8,
+#                'ago': 3,
+#                'dez': 6,
+#                'jul': 2,
+#                'jun': 1,
+#                'mai': 0,
+#                'mar': 7,
+#                'nov': 5,
+#                'out': 4,
+#                'set': 9},
+#     'profissao': {   'admin.': 2,
+#                      'aposentado': 5,
+#                      'colarinho_azul': 3,
+#                      'desempregado': 7,
+#                      'dona_casa': 0,
+#                      'empreendedor': 10,
+#                      'estudante': 11,
+#                      'gerente': 6,
+#                      'informal': 8,
+#                      'servicos': 1,
+#                      'tecnico': 4},
+#     'resultado': {'nao': 0, 'sim': 1}}
+```
 
 ## Sample Size
 - Too large samples are a waste of time and money, too small are inaccurate.
@@ -528,15 +589,9 @@ list_columns = get_col(df=df_callcenter,
 
 `sample_size = (z * std) / error`
 
-
 <img src="images/grau_confiança.png" align="center" height=auto width=80%/>
 
-
-### Bessel Correction
-When taking a sample from a population most values tend to be in the middle of the population, especially if the distribution is normal.
-
-Bessel correction is used to increase standard deviation and data variance
-
+<br/>
 
 ### Statistical Hypothesis Tests
 The data must be interpreted to add meaning. We can interpret data by assuming a specific structure in our result and use statistical methods to confirm or reject the assumption.
@@ -640,81 +695,6 @@ df.set_index([pd.Index([1, 2, 3, 4]), 'year'])
 <img src="images/example_02_one_hot_enconding.png" align="center" height=auto width=80%/>
 
 <br/>
-<br/>
-
-### Map Columns Values
-```python
-# I used the dictionary because they are more efficient in these cases
-# https://stackoverflow.com/questions/22084338/pandas-dataframe-performance
-
-def generate_dict_by_col(df: 'dataframe', *columns: list) -> dict:
-    """
-    :return:
-        Return a dict with label of each column 
-    """
-    dict_unique = {}
-    
-    for column in columns:
-        list_unique = df[column].unique().tolist()
-        dict_column = {}
-    
-        for element in list_unique:
-            if isinstance(element, float) is True:  # type nan is float
-                continue
-            dict_column[element] = int(list_unique.index(element))
-        # add dict column in principal dict 
-        dict_unique[column] = dict_column          
-    
-    print("-"*25, "Dictionary with Values Map by Column", "-"*25, end='\n\n')
-    return dict_unique
-```
-
-```python
-dict_cat_unique = generate_number_by_col(df_callcenter, 
-                                         *list_categorical_col)
-
-pp.pprint(dict_cat_unique)
-# -------------- Dictionary with Values Map by Column ------------
-
-# {   'campanha_anterior': {'fracasso': 1, 'nao_existente': 0, 'sucesso': 2},
-#     'dia_da_semana': {'qua': 2, 'qui': 3, 'seg': 0, 'sex': 4, 'ter': 1},
-#     'educacao': {   'analfabeto': 7,
-#                     'curso_tecnico': 4,
-#                     'ensino_medio': 1,
-#                     'fundamental_4a': 0,
-#                     'fundamental_6a': 2,
-#                     'fundamental_9a': 3,
-#                     'graduacao_completa': 6},
-#     'emprestimo_moradia': {'nao': 0, 'sim': 1},
-#     'emprestimo_pessoal': {'nao': 0, 'sim': 1},
-#     'estado_civil': {'casado': 0, 'divorciado': 2, 'solteiro': 1},
-#     'inadimplente': {'nao': 0, 'sim': 2},
-#     'meio_contato': {'celular': 1, 'telefone': 0},
-#     'mes': {   'abr': 8,
-#                'ago': 3,
-#                'dez': 6,
-#                'jul': 2,
-#                'jun': 1,
-#                'mai': 0,
-#                'mar': 7,
-#                'nov': 5,
-#                'out': 4,
-#                'set': 9},
-#     'profissao': {   'admin.': 2,
-#                      'aposentado': 5,
-#                      'colarinho_azul': 3,
-#                      'desempregado': 7,
-#                      'dona_casa': 0,
-#                      'empreendedor': 10,
-#                      'estudante': 11,
-#                      'gerente': 6,
-#                      'informal': 8,
-#                      'servicos': 1,
-#                      'tecnico': 4},
-#     'resultado': {'nao': 0, 'sim': 1}}
-```
-
----
 
 ### Duplicate Records
 Can receive when:
@@ -964,20 +944,20 @@ _Before observation missing values is necessary take decision if **remove** or *
 4. Reconstruct values
 5. Label
 
-### Missing categorical data
+#### Missing categorical data
 - Apply **mode**
 - Label values as `missing`
 - Subistituir por algum valor fora do intervalo de distribuition
 
-### Missing numeric data
+#### Missing numeric data
 - Apply **mean**
 - The easy way `value = 0`.
 
-### Note
+#### Note
 - xgBoost working with missing values
 
 
-### Dropping `dropna()`
+#### Dropping `dropna()`
 - Remove rows : `dataframe.dropna()`
 - Remove colluns: `dataframe.dropna(axis=1)`
 
@@ -990,7 +970,7 @@ axis=1 : column
 
 <br/>
 
-### Replacing by value out of distribuition `fillna()`
+#### Replacing by value out of distribuition `fillna()`
 
  - Eg: `-999`, `-1`, ...
  - **BAD**:  neural networks.
@@ -999,7 +979,7 @@ axis=1 : column
 
 <br/>
 
-### Apply mean or mode `fillna()`
+#### Apply mean or mode `fillna()`
  - **GOOD**: linear models and neural networks.
  - **BAD**:  para as tree, pode ser mais difícil selecionar o objeto que tinha missing values, logo de início.
 
@@ -1012,7 +992,7 @@ Replace using an algorithm. the forecasting model is one of the sophisticated me
 
 <br/>
 
-### Label `fillna() `
+#### Label `fillna() `
  - **GOOD**: trees and neural networks
  - **BAD**: increase columns numbers.
 
