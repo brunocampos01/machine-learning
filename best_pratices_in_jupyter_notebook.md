@@ -4,9 +4,9 @@
 - [Import Declaration](#import-declaration)
 - [Prepare Principal Directory](#prepare-principal-directory)
 - [Graphics Format](#graphics-format)
+  - [Cell Format](#cell-format)
   - [Matplotlib](#matplotlib)
   - [Seaborn](#seaborn)
-  - [Cell Format](#cell-format)
 - [Auxiliary Code to Hide the Code in Jupyter](#auxiliary-code-to-hide-the-code-in-jupyter)
 
 
@@ -57,7 +57,7 @@ format: `<step><description>.ipynb`
 <br/>
 Example: `0.3-visualize-distributions.ipynb`
 
-### Imports
+### Import Declaration
 Organize all imports in same cell.
 
 ```python
