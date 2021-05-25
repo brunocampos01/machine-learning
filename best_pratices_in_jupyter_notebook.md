@@ -1,5 +1,5 @@
 # Best Pratices in Jupyter Notebook
-- [Pattern Directory Structure](#pattern-directory-structure)
+- [Pattern Directory Structure](#pattern-directory-structure) :file_folder:
 - [Pattern Name of notebook](#pattern-name-of-notebook)
 - [Import Declaration](#import-declaration)
 - [Prepare Principal Directory](#prepare-principal-directory)
@@ -10,7 +10,7 @@
 - [Auxiliary Code to Hide the Code in Jupyter](#auxiliary-code-to-hide-the-code-in-jupyter)
 
 
-### Pattern Directory Structure :file_folder:
+### Pattern Directory Structure
 ```
 ├── setup.py           <- Make this project pip installable with `pip install -e`
 │  
@@ -44,7 +44,7 @@
 ```
 NOTE: this structure is similary with coockiecutter data science
 
-#### Data Folder :file_folder:
+#### Data Folder
 - **raw** <- The original, immutable data dump.
 - **external** <- Data from third party sources.
 - **processed** <- The final, canonical data sets for modeling.
@@ -52,7 +52,7 @@ NOTE: this structure is similary with coockiecutter data science
 
 Notebooks are for exploration and communication
 
-### Name of notebook
+### Pattern Name of notebook
 format: `<step><description>.ipynb`
 <br/>
 Example: `0.3-visualize-distributions.ipynb`
@@ -134,7 +134,7 @@ warnings.filterwarnings('ignore')
 pp = pprint.PrettyPrinter(indent=4)
 ```
 
-### Graphics Format :bar_chart: :chart_with_upwards_trend:
+### :bar_chart: :chart_with_upwards_trend: Graphics Format
 It is recommended to use a resource file, such as [this](#src/visualization/plot_config.ini). This ensures better standardization of notebooks.
 ```python
 config = configparser.ConfigParser()
