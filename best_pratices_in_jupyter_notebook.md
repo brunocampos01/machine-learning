@@ -1,13 +1,13 @@
 # Best Pratices in Jupyter Notebook
-- [Pattern Directory Structure](#pattern-directory-structure) :file_folder:
-- [Pattern Name of notebook](#pattern-name-of-notebook)
-- [Import Declaration](#import-declaration)
-- [Prepare Principal Directory](#prepare-principal-directory)
-- [Graphics Format](#graphics-format) :bar_chart: :chart_with_upwards_trend:
+- :file_folder: [Pattern Directory Structure](#pattern-directory-structure)
+- :capital_abcd: [Pattern Name of notebook](#pattern-name-of-notebook)
+- :anchor: [Import Declaration](#import-declaration)
+- :open_file_folder: [Prepare Principal Directory](#prepare-principal-directory) 
+- :bar_chart: [Graphics Format](#graphics-format)
   - [Cell Format](#cell-format)
   - [Matplotlib](#matplotlib)
   - [Seaborn](#seaborn)
-- [Auxiliary Code to Hide the Code in Jupyter](#auxiliary-code-to-hide-the-code-in-jupyter)
+- :blue_book: [Auxiliary Code to Hide the Code in Jupyter](#auxiliary-code-to-hide-the-code-in-jupyter) 
 
 
 ### Pattern Directory Structure
