@@ -10,7 +10,7 @@
   - [Collect Initial Data](#collect-initial-data)
   - [Describe Data](#describe-data)
     - [Ways to Explore Data](#ways-to-explore-data)
-      - [Exploratory Analysis: Statistic](#exploratory-analysis:-statistic)
+      - [Exploratory Analysis-Statistic](#exploratory-analysis-statistic)
         - [Measures Central Trend](#measures-central-trend)
         - [Measure of Shape](#measure-of-shape)
         - [Measures of spread](#measures-of-spread)
@@ -21,18 +21,18 @@
     - [Map Columns Values](#map-columns-values)
     - [Sample Size](#sample-size)
     - [Statistical Hypothesis Tests](#statistical-hypothesis-tests)
-- [Data Preparation](#Data Preparation)
-  - [Name Adaption of Features](#Name Adaption of Features)
-  - [Strip and Lower](#Strip and Lower)
-  - [Set Index](#Set Index)
-  - [Feature Selection](#Feature Selection)
-  - [One-hot-encoding](#One-hot-encoding)
-  - [Duplicate Records](#Duplicate Records)
-  - [Missing Values](#Missing Values)
-  - [Fixing Data Types](#Fixing Data Types)
-  - [Outliers](#Outliers)
-  - [Feature Engineering](#Feature Engineering)
-  - [Feature Selection](#Feature Selection)
+- [Data Preparation](#data-preparation)
+  - [Name Adaption of Features](#name-adaption-of-features)
+  - [Strip and Lower](#strip-and-lower)
+  - [Set Index](#set-index)
+  - [Feature Selection](#feature-selection)
+  - [One-hot-encoding](#one-hot-encoding)
+  - [Duplicate Records](#duplicate-records)
+  - [Missing Values](#missing-values)
+  - [Fixing Data Types](#fixing-data-types)
+  - [Outliers](#outliers)
+  - [Feature Engineering](#feature-engineering)
+  - [Feature Selection](#feature-selection)
 <!-- - [Modeling](#)
 - [Evaluation](#)
 - [Deployment](#)
@@ -175,7 +175,7 @@ df.info()
 
 <br/>
 
-### Exploratory Analysis: Statistic
+### Exploratory Analysis-Statistic
 "_Get to know the dataset_"
 
 <img src="images/undestand_data.png" align="center" height=auto width=70%/>
@@ -996,7 +996,7 @@ Replace using an algorithm. the forecasting model is one of the sophisticated me
  - **GOOD**: trees and neural networks
  - **BAD**: increase columns numbers.
 
-<img src="images/label_missing_values.png" align="center" height=auto width=80%/>
+<img src="images/label_missing_values.png" align="center" height=auto width=50%/>
 
 <br/>
 <br/>
@@ -1067,9 +1067,8 @@ handler_typing(df_callcenter, 'int16', list_cont_feature, *list_columns)
 
 
 ### Outliers
-```
-Better Data > Fancier Algorithms
-```
+_Better Data > Fancier Algorithms_
+
 - Check if contains outliers
 - Count outliers
 - Check percentage
@@ -1081,6 +1080,7 @@ Better Data > Fancier Algorithms
 - In general, if you have a **legitimate** reason to remove an outlier, it will help your model’s performance.
 - However, outliers are innocent until proven guilty. **You should never remove an outlier just because it’s a "big number." **
 
+##### Code
 ```python
 # quantile()
 
@@ -1385,6 +1385,7 @@ Undertanding box-plot
 
 <img src="images/quartis.png" align="center" height=auto width=80%/>
 
+##### Code
 ```python
 import seaborn as sns
 sns.boxplot(x=df_callcenter['duracao'],
@@ -1459,14 +1460,11 @@ The graph Normal ditribuition help understand a boxplot.
 <img src="images/Outlier_print.png" align="center" height=auto width=80%/>
 
 ### Drop
-
 1. Select conditional
   - `query()` process using `loc[]` and `eval()` 
   - `loc()`
-
 2. Drop row
   - `drop(axis=1)`
-
 
 #### Select conditional
 ```python
@@ -1494,7 +1492,6 @@ df_callcenter = df_callcenter.drop(df_result_query, axis=1)
 Create feature `['outliers']` where:
 - 0 is not outlier
 - 1 is outlier
-
 ```python
 # where()
 
