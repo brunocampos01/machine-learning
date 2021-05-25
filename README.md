@@ -1,33 +1,18 @@
 # Summary
-## Best Pratices in Jupyter Notebook
-- [Pattern Directory Structure](#best_pratices_in_jupyter_notebook.md.md/pattern-directory-structure)
-- [Pattern Name of notebook](#pattern-name-of-notebook)
-- [Import Declaration](#import-declaration)
-- [Prepare Principal Directory](#prepare-principal-directory)
-- [Graphics Format](#graphics-format)
-  - [Matplotlib](#matplotlib)
-  - [Matplotlib Resource File](#matplotlib-resource-file)
-  - [Seaborn](#seaborn)
-  - [Cell Format](#cell-format)
-- [Auxiliary Code to Hide the Code in Jupyter](#auxiliary-code-to-hide-the-code-in-jupyter)
-
 ## Fundaments of Data Science
 - [Probability](#probability)
 - [Statistics](#statistics)
 - [Python](https://github.com/brunocampos01/becoming-a-expert-python)
 
 ## CRISP DM
-- [Business Undertanding](#)
-  - [Determine business objectives](#determine-business-objectives)
-  - [Assess Situation](#assess-situation)
-
-<!-- - [Data Undertanding](#data-undertanding)
+- [Business Undertanding](#business-undertanding)
+- [Data Undertanding](#data-undertanding)
   - [Describe Data](#describe-data)
   - [Collect Initial Data](#collect-initial-data)
   - [Irrelevant Data](#irrelevant-data)
   - [Split Features](#split-features)
   - [Exploratory Analysis](#exploratory-analysis)
-- [Data Preparation](#Data Preparation)
+<!-- - [Data Preparation](#Data Preparation)
   - [Name Adaption of Features](#Name Adaption of Features)
   - [Strip and Lower](#Strip and Lower)
   - [Set Index](#Set Index)
@@ -42,7 +27,7 @@
   - [Feature Selection](#Feature Selection)
 - [Modeling](#)
 - [Evaluation](#)
-- [Deployment](#) -->
+- [Deployment](#)
 
 ## Machine Learning
 - [linear_models](#linear_models)
@@ -55,11 +40,10 @@
 ## Deep Learning
 - [Perceptros](#perceptros)
 - [Neural Networks](#neural-networks)
-
+ -->
 <br/>
 
 ---
-
 
 
 <br/>
@@ -70,30 +54,27 @@
 ## Statistics
 ...
 
-
-## CRISP-DM
-
-<img src="images/crips_dm.png" align="center" height=auto width=100%/>
-
-
-### Business Undertanding
-There are many different types of issues that can be resolved by data science. Examples include insights into illnesses, sales forecasts and hardware failures. A company that is faced with a question that can be answered with the use of data may decide to hire a data science team to solve the problem.
-In your company's example, the business-related problem is that the broom stock runs out before the end of the month. Therefore, the company seeks to replenish the broom stock according to the broom sales forecast.
-
-**Example**: A nonprofit organization that survives on fundraising will start contacting people to request donations. However, there are few collaborators and the latest attempts have not yielded an expected result. For this reason, the organization decided to carry out a data mining project based on the success criteria of the project: better assertiveness in financial funding. Knowing the remuneration of an individual can help the organization (since it is possible to redirect a percentage of the Income Tax to donations through the FIA - Childhood and Adolescence Fund) to make the most appropriate requests for a request for support and collaboration, or even if they really should get in touch with the person, then this is the criterion for successful mining.
-
-### Determine business objectives
-The definition of project goals and objectives begins with specific and relevant questions to understand the scope of the project. Your company wants to solve the problem with broom sales, but the scope of the project needs to be defined first. Within the scope of the project, the company and its data science team need to define goals and objectives, such as identifying a deadline and milestones for the project.
-
-### Assess Situation
-In this step prepare resources how, enviroment, libraries, directory structure.
-
-### Bizus
+### Competitions Tips
 Winners of data science competitions do their modeling always thinking about which model they will use. For example:
 - tree-based models
 - linear models
+ -->
 
----
+## CRISP-DM
+
+
+<img src="images/crips_dm.png" align="center" height=auto width=100%/>
+
+<br/>
+<br/>
+
+### Business Undertanding
+
+<img src="images/business_under.png" align="center" height=auto width=80%/>
+
+- [The business understanding stage of the Team Data Science Process lifecycle](https://docs.microsoft.com/pt-br/azure/machine-learning/team-data-science-process/lifecycle-business-understanding)
+- [CRISP-DM on AWS](https://gist.github.com/bluekidds/cad5c0ea2e5051b638ec39810f3c4b09)
+
 
 ## Data Understanding
 
@@ -155,7 +136,7 @@ The first step to data cleaning is removing unwanted observations from your data
 tip: in SQL every use `select distict`
 
 
-<img src="images/irrelevant_data.png" align="center" height=auto width=80%/>
+<img src="images/irrelevant_data.png" align="center" height=auto width=70%/>
 
 <br/>
 
@@ -168,16 +149,6 @@ def show_categorical_values(df: 'DataFrame', *columns: list) -> None:
         list_unique = df[column].unique()
         print(f"The categorical column {column} contains this values:\n\n{list_unique}")
 ```
-
-
-
-
-### Categorical ---> Numerical
-Statistical learning algorithms work only with **numerical values**.
-
-#### Efect of Algoritms
-- Ótimo para modelos de tree
-- Confuso para linear models
 
 #### Split Features
 - Numerical cols
@@ -219,11 +190,10 @@ list_columns = get_col(df=df_callcenter,
 
 <br/>
 
-#### Exploratory Analysis: Statistic
-```
-"get to know the dataset"
-```
-<img src="images/undestand_data.png" align="center" height=auto width=80%/>
+## Exploratory Analysis: Statistic
+"**_Get to know the dataset_**"
+
+<img src="images/undestand_data.png" align="center" height=auto width=70%/>
 
 <br/>
 <br/>
@@ -244,7 +214,7 @@ list_columns = get_col(df=df_callcenter,
   - Skewness
     - Simetric distribution
 
-<img src="images/mean_mode_median.png" align="center" height=auto width=80%/>
+<img src="images/mean_mode_median.png" align="center" height=auto width=70%/>
 
 ## Understand Data
 - First read metadata
@@ -311,7 +281,7 @@ Medidas de forma descrevem a forma da distribuição de um conjunto de valores.
 
 Quanto mais próximo estiver de 0, melhor (normal distribuition). A assimetria basicamente significa que os dados de saída estão concentrados em uma extremidade do intervalo. Nós gostamos que nossos dados sejam o mais central possível.
 
-<img src="images/skews.png" align="center" height=auto width=80%/>
+<img src="images/skews.png" align="center" height=auto width=70%/>
 
 ```python
 df.skew()
