@@ -7,8 +7,12 @@
 ## CRISP DM
 - [Business Undertanding](#business-undertanding)
 - [Data Undertanding](#data-undertanding)
-  - [Describe Data](#describe-data)
   - [Collect Initial Data](#collect-initial-data)
+  - [Describe Data](#describe-data)
+    - [Ways to Explore Data](#Ways to Explore Data)
+      - [Summary Statistics](#Summary Statistics)
+      - [Visualization](#Visualization)
+
   - [Irrelevant Data](#irrelevant-data)
   - [Split Features](#split-features)
   - [Exploratory Analysis](#exploratory-analysis)
@@ -74,58 +78,14 @@ Winners of data science competitions do their modeling always thinking about whi
 
 <br/>
 
+---
+
 ## Data Understanding
-
-### Describe Data
-First, you'll want to answer a set of basic questions about the dataset:
-
-- How many observations do I have?
-- How many features?
-- What are the data types of my features? Are they numeric? Categorical?
-- Do I have a target variable?
-
-<img src="images/organic.png" align="center" height=auto width=70%/>
-
-<br/>
-
-#### Code
-```python
-print("Dataframe:\n{} rows\n{} columns".format(df.shape[0], df.shape[1]))
-
-# Dataframe:
-# 45222 rows
-# 14 columns
-```
-
-```python
-df.head()
-```
-
-```python
-df.info()
-
-# <class 'pandas.core.frame.DataFrame'>
-# RangeIndex: 595212 entries, 0 to 595211
-# Data columns (total 59 columns):
-# id                595212 non-null int64
-# target            595212 non-null int64
-# ps_ind_01         595212 non-null int64
-# ps_ind_02_cat     594996 non-null float64
-# ...
-```
-
-### Ways to Explore Data
-- Summary Statistics
-- Visualization
-
-<img src="images/way_to_explore.png" align="center" height=auto width=80%/>
-
-<br/>
 
 ### Collect Initial Data
 Most companies have an enormous amount of data, so it is essential to decide what types of data are needed for the project. Next, you need to determine where they are stored and how to gain access to the data. Depending on where your company stores the data, it’s up to data engineers to get the data from the company’s data source, clear the data and hand it over to the data scientist.
 
-### Load and Save Dataset
+#### Code: Load and Save Dataset
 - Load
 ```python
 %%time
@@ -152,6 +112,51 @@ def save_data(df: 'dataframe' = None,
 
 # CPU times: user 8.44 ms, sys: 14 µs, total: 8.45 ms
 ```
+
+
+### Describe Data
+First, you'll want to answer a set of basic questions about the dataset:
+
+- How many observations do I have?
+- How many features?
+- What are the data types of my features? Are they numeric? Categorical?
+- Do I have a target variable?
+
+<img src="images/organic.png" align="center" height=auto width=50%/>
+
+<br/>
+
+#### Code
+```python
+df.head()
+```
+
+```python
+print("Dataframe:\n{} rows\n{} columns".format(df.shape[0], df.shape[1]))
+
+# Dataframe:
+# 45222 rows
+# 14 columns
+```
+
+```python
+df.info()
+
+# <class 'pandas.core.frame.DataFrame'>
+# RangeIndex: 595212 entries, 0 to 595211
+# Data columns (total 59 columns):
+# id                595212 non-null int64
+# target            595212 non-null int64
+# ps_ind_01         595212 non-null int64
+# ps_ind_02_cat     594996 non-null float64
+# ...
+```
+
+#### Ways to Explore Data
+- Summary Statistics
+- Visualization
+
+<img src="images/way_to_explore.png" align="center" height=auto width=80%/>
 
 <br/>
 
