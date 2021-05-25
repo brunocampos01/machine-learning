@@ -26,13 +26,26 @@
   - [Strip and Lower](#strip-and-lower)
   - [Set Index](#set-index)
   - [Feature Selection](#feature-selection)
-  - [One-hot-encoding](#one-hot-encoding)
   - [Duplicate Records](#duplicate-records)
   - [Missing Values](#missing-values)
   - [Fixing Data Types](#fixing-data-types)
   - [Outliers](#outliers)
   - [Feature Engineering](#feature-engineering)
+    - [Binarization](#binarization)
+       - [Binarizer](#binarization)
+       - [One-hot-encoding](#one-hot-encoding)
+       - [Feature Hashing](#feature-hashing)
+    - [Feature Rescaling](#feature-rescaling)
+       - [Log Transform](#log-transform)
+       - [normalization](#normalization)
+       - [standardization](#standardization)
+       - [Min Max Scaler](#min-max-scaler)
+    - [Feature Iteraction](#Feature Iteraction)
+    - [Polynomial Features](#Polynomial Features)
+    - [Feature Engineering](#feature-engineering)
   - [Feature Selection](#feature-selection)
+  - [Checklist for Find the Best Features](#checklist-for-find-the-best-features)
+
 <!-- - [Modeling](#)
 - [Evaluation](#)
 - [Deployment](#)
@@ -1539,77 +1552,19 @@ It is the part where most hypotheses are tested!
 
 <img src="images/feature_eng.png" align="center" height=auto width=80%/>
 
-
-#### List of Techniques
-Numerical Features
-
-1. Log Transform
-
-log_function.png
-log_example.png
-
-1. Binarization
-    1. One-Hot Encoding (3-preprocessing)
-
-
-1. Feature scaling
- - MinMax Scaling
- - Standard Scaling (Z-score)
- 
-1. Normalization
-
-1. Binning (continuos ---> discretize)
-  - data wawrehouse
-  - Cada bin representa um range de dados
-  - The main motivation of binning is to make the model more robust and prevent overfitting, however, it has a cost to the performance
-   - Every time you bin something, you sacrifice information and make your data more regularized. 
-  - The trade-off between performance and overfitting is the key point of the binning process.
-
-
-1. Grouping Operations
-  - Categorical Column Grouping
-    - highest frequency. `groupby()`
-    - pivot table `pivot_table()` pivot_table.png aggregated functions for the values between grouped and encoded columns. This would be a good option if you aim to go beyond binary flag columns and merge multiple features into aggregated features
-  - Numerical Column Grouping: Numerical columns are grouped using sum and mean functions in most of the cases.
-
-
-1. Feature Hashing
-For large scale categorical features
-- Hashing schemes work on strings, numbers and other structures like vectors. 
-- `FeatureHasher()`
-
-
-
-
-This is often one of the most valuable tasks a data scientist can do to improve model performance
-
-Você pode isolar e destacar informações importantes, o que ajuda seus algoritmos a "se concentrar" no que é importante.
-Você pode trazer seu próprio conhecimento de domínio. Crie novas features a partir do que vc já sabe, por exemplo, em stock price do facebook, tal dia aconteceu o escandalo do cambriege analystics
-
-- one-hot encoding
-- Bag of words
-- Dummy variables
-- Feature Selection
-- Feature Importance
-- Interaction Features (products, sums, or differences between two features.)
-
 <br/>
 
 <img src="images/stay_elegant.png" align="center" height=auto width=80%/>
 
 
 #### Binarization
-
 Transform features into binary features.
-
-Tescniques:
-
 - **Binarization:** continuos and discret features
 - **One Hot Enconding:** categorical features
+- **One-Hot Encondig Advanced: Feature Hashing:** categorical features
+<br/>
 
-
-
-### `Binarizer()`
+#### Binarizer
 Gross frequencies or counts ** may not be relevant ** for building a model based on the problem being solved.
 
 For example, if I am creating a recommendation system for song recommendations, I would just like to know if a person is interested or has already heard a particular song. This does not require the number of times a song has been heard, as I am more concerned with the various songs he has listened to.
@@ -1755,30 +1710,6 @@ def plot_distribuition(df: 'dataframe', column: str):
 ```
 
 
-### Bin-counting
-It is replacing a categorical value with a statistic from that feature.
-For example, the name of each showcase becomes its conversion rate.
-<br/>
-The big advantage is that a decision tree will learn that the conversion rate has a great weight
-
-
-### Algoritms
-It is a great aid for decision tree and linear models.
-
-<img src="images/hashing.png" align="center" height=auto width=80%/>
-
-#### Frequency Enconding
-- We can map these features to their frequency values.
-- It is if the frequency of the value is correlated with the feture target.
-
-<img src="images/frequency.png" align="center" height=auto width=80%/>
-
-We can change the values accordingly: c to 0.3, s to 0. 5 and q to 0.2. 
-<br/>
-This will preserve some information about value distribution
-
-
-
 #### Feature Scaling (normalization)
 - `média = 0`.
 
@@ -1910,6 +1841,28 @@ We can add a new feature indicating a fractional part of these prices.
 For example, if a product costs 2.49, the fractional part of its price is 0.49. This feature can help the model to use differences in people's perceptions of these prices.
 <br/>
 In addition, we can find similar patterns in tasks that require distinguishing between a human and a robot.
+
+### Bin-counting
+It is replacing a categorical value with a statistic from that feature.
+For example, the name of each showcase becomes its conversion rate.
+<br/>
+The big advantage is that a decision tree will learn that the conversion rate has a great weight
+
+
+### Algoritms
+It is a great aid for decision tree and linear models.
+
+<img src="images/hashing.png" align="center" height=auto width=80%/>
+
+#### Frequency Enconding
+- We can map these features to their frequency values.
+- It is if the frequency of the value is correlated with the feture target.
+
+<img src="images/frequency.png" align="center" height=auto width=80%/>
+
+We can change the values accordingly: c to 0.3, s to 0. 5 and q to 0.2. 
+<br/>
+This will preserve some information about value distribution
 
 ---
 
