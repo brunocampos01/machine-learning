@@ -40,8 +40,8 @@
        - [normalization](#normalization)
        - [standardization](#standardization)
        - [Min Max Scaler](#min-max-scaler)
-    - [Feature Iteraction](#Feature Iteraction)
-    - [Polynomial Features](#Polynomial Features)
+    - [Feature Iteraction](#feature-iteraction)
+    - [Polynomial Features](#polynomial-features)
     - [Feature Engineering](#feature-engineering)
   - [Feature Selection](#feature-selection)
   - [Checklist for Find the Best Features](#checklist-for-find-the-best-features)
@@ -1569,7 +1569,7 @@ Gross frequencies or counts ** may not be relevant ** for building a model based
 
 For example, if I am creating a recommendation system for song recommendations, I would just like to know if a person is interested or has already heard a particular song. This does not require the number of times a song has been heard, as I am more concerned with the various songs he has listened to.
 
-<img src="images/binarization_ex.png" align="center" height=auto width=80%/>
+<img src="images/binarization_ex.png" align="center" height=auto width=60%/>
 
 
 ```python
@@ -1647,9 +1647,10 @@ It is a technique used when you have many categorical features in the same colum
 
 <img src="images/feature_hashing.png" align="center" height=auto width=80%/>
 
+<br/>
 
+#### Feature Rescaling
 ## Log Transform `np.log()`
-
 _Compresses the range of large numbers and expand the range of small numbers._
 
 - Features with very distorted distribution
@@ -1679,7 +1680,7 @@ _Compresses the range of large numbers and expand the range of small numbers._
 df_callcenter['duracao'] = [np.log(x) for x in df_callcenter['duracao']]
 ```
 
-#### 0 of Log 
+#### 0 
 - Feature has a value of 0
 - Log of 0 is undefined, so we have to increment the values by a small amount above 0 to apply the logarithm properly.
 
@@ -1709,8 +1710,9 @@ def plot_distribuition(df: 'dataframe', column: str):
                 showfliers=True)
 ```
 
+<br/>
 
-#### Feature Scaling (normalization)
+#### Normalization
 - `média = 0`.
 
 In real life, it is absurd to expect the ** age ** and ** income ** columns to have the same range. But from the machine learing point of view how can these two columns be compared?
@@ -1747,9 +1749,28 @@ In general, algorithms that **exploit distances** between data samples, such as 
 
 <img src="images/decision-tree-boundaries.png" align="center" height=auto width=80%/>
 
+<br/>
 
+#### Standardization
+- It is the application of the smoothest log
+- It means changing the values so that the `standard deviation = 1`
+- Changes the distribution, bringing it closer to a normal distribution.
 
-### Min Max Scaler
+<img src="images/standarization.png" align="center" height=auto width=80%/>
+
+```python
+from sklearn.preprocessing import StandardScaler
+
+# trainnig data
+scaler_transformer = StandardScaler().fit(df_callcenter[list_col_scale])
+df_callcenter[list_col_scale] = scaler_transformer.transform(df_callcenter[list_col_scale])
+
+df_callcenter[list_col_scale].tail()
+```
+
+<br/>
+
+#### Min Max Scaler
 interval: 0 until 1
 
 <img src="images/minmax.png" align="center" height=auto width=80%/>
@@ -1777,24 +1798,7 @@ df_callcenter[list_col_scale].tail()
 # 41187	0.048597	0.0363636
 ```
 
-### Standardization
-- It is the application of the smoothest log
-- It means changing the values so that the `standard deviation = 1`
-- Changes the distribution, bringing it closer to a normal distribution.
-
-<img src="images/standarization.png" align="center" height=auto width=80%/>
-
-
-
-```python
-from sklearn.preprocessing import StandardScaler
-
-# trainnig data
-scaler_transformer = StandardScaler().fit(df_callcenter[list_col_scale])
-df_callcenter[list_col_scale] = scaler_transformer.transform(df_callcenter[list_col_scale])
-
-df_callcenter[list_col_scale].tail()
-```
+<br/>
 
 ---
 
@@ -1819,9 +1823,6 @@ Simple linear models use a linear combination of the individual input features, 
 - create feature combinations (nonlinear features).
 
 <img src="images/interacion_feature_random.png" align="center" height=auto width=80%/>
-
-
-
 
 - Use domain knowledge to think about what interactions are likely
 
